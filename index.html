@@ -1,11 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/minty/bootstrap.min.css" />
 </head>
+
 <body>
-    
+    <h1>Ingreso barrio test</h1>
+    <div class="container p-2">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h4">Ingresa tu Barrio</h1>
+
+                        <form id="barrioFormulario">
+                            <div class="form-group">
+                                <input type="text" id="barrioNombre" class="form-control" placeholder="Nombre del Barrio"
+                                    autofocus />
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" id="barrioUbicacion" class="form-control" placeholder="Ubicación" />
+                                <input type="text" id="barrioRegion" class="form-control" placeholder="Region" />
+                                <input type="text" id="barrioComuna" class="form-control" placeholder="Comuna" />
+                                <input type="text" id="barrioHistorial" class="form-control" placeholder="Historial" />
+                            </div>
+
+                            <button class="btn btn-primary" id="btnBarrioFormulario">
+                                Guardar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyB5nufGCvXAxCYreiHtz27pOrmo48BjMq0",
+            authDomain: "mibarrio-43da9.firebaseapp.com",
+            projectId: "mibarrio-43da9",
+            storageBucket: "mibarrio-43da9.appspot.com",
+            messagingSenderId: "577326795997",
+            appId: "1:577326795997:web:31190c2d54854ca5621f34",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="scripts.js"></script>
 </body>
+
 </html>
