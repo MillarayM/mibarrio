@@ -5,6 +5,7 @@
 
 header {
     height: 300px;
+    width: 100%;
     background-image: url('../img/barrio_hero_section.jpg');
     background-repeat: no-repeat;
     background-position: center;
