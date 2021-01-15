@@ -10,3 +10,8 @@ header {
     background-repeat: no-repeat;
     background-position: center;
 }
+
+.bg-black{
+    background: rgb(0, 0, 0,.50);
+    height: 300px;
+}
