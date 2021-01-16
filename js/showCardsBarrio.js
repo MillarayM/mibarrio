@@ -13,8 +13,14 @@ window.addEventListener("DOMContentLoaded", (e) => {
 			const barrio = doc.data();
             containerBarrios.innerHTML += 
                 `<div class="card card-body mt-2 px-1 col-4 border-primary">
-                <h3 class="h5">${barrio.nombre}</h3>
-                <p>${barrio.comuna}</p>
+                    <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ03luuGw4KJi-L-9NoFeC3BWgS5LGnT4E6UA&usqp=CAU>
+                    <h3 class="h5">${barrio.nombre}</h3>
+                    <p>${barrio.comuna}</p>
+                    <p>${barrio.region}</p>
+                    <div class="text-center">
+                        <button class="btn btn-success">Ver Barrio</button>
+                        <button class="btn btn-info">Ver Proyectos</button>
+                    </div>
                 </div>`;
 		});
 	});
