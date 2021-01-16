@@ -4,7 +4,8 @@ const db = firebase.firestore();
 // nombre formulario : usuarioFormulario
 
 const usuarioFormulario = document.getElementById("usuarioFormulario");
-const usuariosContainer = document.getElementById("usuariosContainer");
+//const usuariosContainer = document.getElementById("usuariosContainer");
+const usuariosFilas = document.getElementById("usuarioFilas");
 
 let editStatus = false;
 let id = "";
@@ -38,35 +39,34 @@ const updateUsuario = (id, updatedUsuario) =>
 // para mostrar en pantalla
 window.addEventListener("DOMContentLoaded", async (e) => {
   onGetUsuarios((querySnapshot) => {
-    usuariosContainer.innerHTML = "";
+    usuariosFilas.innerHTML = "";
 
     querySnapshot.forEach((doc) => {
       const usuario = doc.data();
-     
-      usuariosContainer.innerHTML += `
-        
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${usuario.nombre}</h3>
-        <p>${usuario.apellido}</p>
-        <p>${usuario.rut}</p>
-        <p>${usuario.password}</p>
-        <p>${usuario.direccion}</p>
-        <p>${usuario.email}</p>
-        <p>${usuario.telefono}</p>
-        <p>${usuario.barrio}</p>
-        <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
+
+      usuariosFilas.innerHTML += `
+      <tr>
+      <td>${usuario.nombre}</td>
+      <td>${usuario.apellido}</td>
+      <td>${usuario.rut}</td>
+      <td>${usuario.password}</td>
+      <td>${usuario.direccion}</td>
+      <td>${usuario.email}</td>
+      <td>${usuario.telefono}</td>
+      <td>${usuario.barrio}</td>       
+
+
+        <td> <button class="btn btn-danger btn-delete" data-id="${doc.id}">
+        🗑 Delete
+      </button>
+      <button class="btn btn-warning btn-edit" data-id="${doc.id}">
+        🖉 Edit
+      </button></td>
+        </tr>  
       
       `;
       // para borrar
-      const btnsDelete = usuariosContainer.querySelectorAll(".btn-delete");
+      const btnsDelete = usuariosFilas.querySelectorAll(".btn-delete");
       btnsDelete.forEach((btn) =>
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
@@ -79,9 +79,9 @@ window.addEventListener("DOMContentLoaded", async (e) => {
       );
 
 
-    
+
       // para editar
-      const btnsEdit = usuariosContainer.querySelectorAll(".btn-edit");
+      const btnsEdit = usuariosFilas.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           try {
@@ -109,12 +109,12 @@ window.addEventListener("DOMContentLoaded", async (e) => {
   });
 });
 
- 
+
 
 // para crear registros
 usuarioFormulario.addEventListener("submit", async (e) => {
   e.preventDefault();
- 
+
   const usuarioNombre = usuarioFormulario["usuarioNombre"];
   const usuarioApellido = usuarioFormulario["usuarioApellido"];
   const usuarioRut = usuarioFormulario["usuarioRut"];
