@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/minty/bootstrap.min.css" />
+</head>
+
+<body>
+    <h1>Ingreso usuario test</h1>
+    <div class="container p-2">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h4">Ingreso de Usuarios</h1>
+
+                        <form id="usuarioFormulario">
+                            <div class="form-group">
+                                <input type="text" id="usuarioNombre" class="form-control"
+                                    placeholder="Nombre del usuario" autofocus />
+                            </div>
+<!--  // (nombre, apellido, dirección, email, telefono, barrio) -->
+                            <div class="form-group">
+                                <input type="text" id="usuarioApellido" class="form-control" placeholder="Apellido" />
+                                <input type="text" id="usuarioRut" class="form-control" placeholder="Rut" />
+                                <input type="text" id="usuarioPassword" class="form-control" placeholder="Password" />
+                                <input type="text" id="usuarioDireccion" class="form-control" placeholder="Dirección" />
+                                <input type="text" id="usuarioEmail" class="form-control" placeholder="Email" />
+                                <input type="text" id="usuarioTelefono" class="form-control" placeholder="Teléfono" />
+                                <input type="text" id="usuarioBarrio" class="form-control" placeholder="Barrio" />
+                            </div>
+
+                            <button class="btn btn-primary" id="btnUsuarioFormulario">
+                                Guardar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Usuario List -->
+        <div class="col-md-6" id="usuariosContainer"></div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBD9dBwvVCVL8-TbSBvXSJvj_8r3gX6kvE",
+            authDomain: "mibarrio-51942.firebaseapp.com",
+            projectId: "mibarrio-51942",
+            storageBucket: "mibarrio-51942.appspot.com",
+            messagingSenderId: "182863864432",
+            appId: "1:182863864432:web:c9afa25a99632538510ab5",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="scriptsUsuarioCrud.js"></script>
+</body>
+
+</html>
