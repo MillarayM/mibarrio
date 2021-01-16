@@ -28,12 +28,14 @@
         </button>
     </nav>
     <!-- Este es el hero section -->
-    <header >
+    <header>
         <div class="container px-5">
             <div class="text-white bg-black">
                 <h1 class="text-center pt-5">Mejora la imagen de tu barrio o territorio de la estigmatización</h1>
-                <p class="text-center px-5">Registrate en la página, y cuéntanos aspectos positivos de tu barrio, si existen iniciatvas que mejoran
-                    tu barrio, o personas que den vida a tu comunidad. También puedes aportar ideas para seguir mejorando la calidad de vida de tu entorno y tu comunidad
+                <p class="text-center px-5">Registrate en la página, y cuéntanos aspectos positivos de tu barrio, si
+                    existen iniciatvas que mejoran
+                    tu barrio, o personas que den vida a tu comunidad. También puedes aportar ideas para seguir
+                    mejorando la calidad de vida de tu entorno y tu comunidad
                 </p>
             </div>
         </div>
@@ -43,19 +45,33 @@
         <h2 class="text-center pt-3">Busque su Barrio</h2>
         <input class="form-control" list="datalistOptions" id="filtradorBarrios" placeholder="Type to search...">
         <datalist id="datalistOptions">
-            <option value="San Francisco">
-            <option value="New York">
-            <option value="Seattle">
-            <option value="Los Angeles">
-            <option value="Chicago">
+
         </datalist>
     </div>
-
-    <section class="container">
-        <h2 class="text-center">Aquí se muestra el barrio</h2>
-        <div class="row d-flex justify-content-between" id="show-barrios">
+    <section id="section-modales">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content" id='infoBarrios'>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content" id='infoProyectos'>
+                    <div></div>
+                </div>
+            </div>
         </div>
     </section>
+    <section class="container">
+        <h2 class="text-center">Aquí se muestra el barrio</h2>
+        <div class="row d-none justify-content-between" id="barriosCardsFiltro">
+        </div>
+        <div class="row d-flex justify-content-between" id="barriosCardsGeneral">
+        </div>
+    </section>
+
     <footer class="bg-primary text-white">
         <p class="text-center">Aplicación creada por: Millaray, Pablo, Pedro</p>
     </footer>
@@ -72,7 +88,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+    https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
 
     <script>
