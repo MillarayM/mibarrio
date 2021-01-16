@@ -4,18 +4,20 @@ const db = firebase.firestore();
 // nombre formulario : contactoFormulario
 
 const contactoFormulario = document.getElementById("contactoFormulario");
-const contactosContainer = document.getElementById("contactosContainer");
+//const contactosContainer = document.getElementById("contactosContainer");
+const contactosFilas = document.getElementById("contactoFilas");
 
 let editStatus = false;
 let id = "";
 
 /// crear
-const guardarContacto = (nombre, fecha, detalle, email) =>
+const guardarContacto = (nombre, fecha, detalle, email, estado) =>
   db.collection("contactos").doc().set({
     nombre,
     fecha,
     detalle,
     email,
+    estado,
   });
 
 // leer
@@ -34,31 +36,26 @@ const updateContacto = (id, updatedContacto) =>
 // para mostrar en pantalla
 window.addEventListener("DOMContentLoaded", async (e) => {
   onGetContactos((querySnapshot) => {
-    contactosContainer.innerHTML = "";
+    contactosFilas.innerHTML = "";
 
     querySnapshot.forEach((doc) => {
-      const contacto = doc.data();
-   
-      contactosContainer.innerHTML += `
-        
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${contacto.nombre}</h3>
-        <p>${contacto.fecha}</p>
-        <p>${contacto.detalle}</p>
-        <p>${contacto.email}</p>
-         <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
-      
+      const contacto = doc.data();   
+      contactosFilas.innerHTML += `<tr>
+      <td>${contacto.nombre}</td>
+      <td>${contacto.fecha}</td>
+      <td>${contacto.email}</td>
+      <td>${contacto.estado}</td>
+      <td>${contacto.detalle}</td>   
+      <td> <button class="btn btn-danger btn-delete" data-id="${doc.id}">
+      🗑 Delete
+    </button>
+    <button class="btn btn-warning btn-edit" data-id="${doc.id}">
+      🖉 Edit
+    </button></td>
+      </tr>
       `;
       // para borrar
-      const btnsDelete = contactosContainer.querySelectorAll(".btn-delete");
+      const btnsDelete = contactosFilas.querySelectorAll(".btn-delete");
       btnsDelete.forEach((btn) =>
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
@@ -73,7 +70,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
 
 
       // para editar
-      const btnsEdit = contactosContainer.querySelectorAll(".btn-edit");
+      const btnsEdit = contactosFilas.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           try {
@@ -83,6 +80,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             contactoFormulario["contactoFecha"].value = contacto.fecha;
             contactoFormulario["contactoDetalle"].value = contacto.detalle;
             contactoFormulario["contactoEmail"].value = contacto.email;
+            contactoFormulario["contactoEstado"].value = contacto.estado;
             editStatus = true;
             id = doc.id;
             contactoFormulario["btnContactoFormulario"].innerText = "Update";
@@ -105,6 +103,7 @@ contactoFormulario.addEventListener("submit", async (e) => {
   const contactoFecha = contactoFormulario["contactoFecha"];
   const contactoDetalle = contactoFormulario["contactoDetalle"];
   const contactoEmail = contactoFormulario["contactoEmail"];
+  const contactoEstado = contactoFormulario["contactoEstado"];
   try {
     if (!editStatus) {
       await guardarContacto(
@@ -112,6 +111,7 @@ contactoFormulario.addEventListener("submit", async (e) => {
         contactoFecha.value,
         contactoDetalle.value,
         contactoEmail.value,
+        contactoEstado.value,
       );
     } else {
       await updateContacto(id, {
@@ -119,6 +119,7 @@ contactoFormulario.addEventListener("submit", async (e) => {
         fecha: contactoFecha.value,
         detalle: contactoDetalle.value,
         email: contactoEmail.value,
+        estado: contactoEstado.value,
       });
 
       editStatus = false;
