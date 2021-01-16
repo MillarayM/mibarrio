@@ -18,8 +18,9 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/main.html">Inicio</a>
-                <a class="nav-link" href="#">Login</a>
-                <a class="nav-link" href="#">Crear Cuenta</a>
+                <a class="nav-link active" aria-current="page" href="#contactanos">Contáctanos</a>
+                <!--    <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="#">Crear Cuenta</a>-->
             </div>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -40,42 +41,80 @@
             </div>
         </div>
     </header>
-    <section class="container">
+    <section class="container p-4">
         <h2 class="text-center">Registrate</h2>
-        <form class="row g-3">
-            <div class="col-md-6">
-                <label for="inputNombreUsuario" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="inputNombreUsuario">
+        <form id="usuarioFormulario" class="row g-3">
+            <div class="form-group col-md-6">
+                <label for="usuarioNombre" class="form-label">Nombre</label>
+                <input type="text" id="usuarioNombre" class="form-control" placeholder="Nombre del usuario" autofocus />
             </div>
-            <div class="col-md-6">
-                <label for="inputApellidosUsuario" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" id="inputApellidosUsuario">
+            <div class="form-group col-md-6">
+                <label for="usuarioApellido" class="form-label">Apellidos</label>
+                <input type="text" id="usuarioApellido" class="form-control" placeholder="Apellido" />
             </div>
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4">
+            <div class="form-group col-md-6">
+                <label for="usuarioRut" class="form-label">Rut</label>
+                <input type="text" id="usuarioRut" class="form-control" placeholder="Rut" />
             </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="inputPassword4">
+            <div class="form-group col-md-6">
+                <label for="usuarioPassword" class="form-label">Contraseña</label>
+                <input type="password" id="usuarioPassword" class="form-control" placeholder="Password" />
             </div>
-            
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">Barrio o territorio</label>
-                <input type="text" class="form-control" id="inputCity">
+            <div class="form-group col-md-6">
+                <label for="usuarioDireccion" class="form-label">Dirección</label>
+                <input type="text" id="usuarioDireccion" class="form-control" placeholder="Dirección" />
             </div>
-            <div class="col-md-4">
-                <label for="inputState" class="form-label">Comuna</label>
-                <input type="text" class="form-control" id="inputCity">
+            <div class="form-group col-md-6">
+                <label for="usuarioEmail" class="form-label">Email</label>
+                <input type="email" id="usuarioEmail" class="form-control" placeholder="Email" />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="usuarioTelefono" class="form-label">Teléfono</label>
+                <input type="text" id="usuarioTelefono" class="form-control" placeholder="Teléfono" />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="usuarioBarrio" class="form-label">Barrio o territorio</label>
+                <input type="text" id="usuarioBarrio" class="form-control" placeholder="Barrio" />
             </div>
             <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
+                <button class="btn btn-primary" id="btnUsuarioFormulario"> Registrate</button>
             </div>
         </form>
+    </section>
 
+    <!-- contacto-->
+    <section id="contactanos" class="bg-info m-5 text-white">
+
+        <h2 class="text-center">Tienes dudas? , Necesitas ayuda?, quieres inscribir tu proyecto?</h2>
+        <h2 class="text-center">Contáctanos</h2>
+
+        <div class="row justify-content-center m-3">
+            <form id="contactoFormulario" class="row">
+                <div class="form-group col-md-6">
+                    <label for="contactoNombre" class="form-label">Nombre </label>
+                    <input type="text" id="contactoNombre" class="form-control" placeholder="Nombre del contacto"
+                        autofocus />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="contactoEmail" class="form-label">email </label>
+                    <input type="email" id="contactoEmail" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="contactoDetalle" class="form-label"> Tienes dudas? , Necesitas ayuda?, quieres inscribir tu proyecto?</label>
+                    <textarea input type="text" id="contactoDetalle" class="form-control" placeholder="Detalle"></textarea>
+                </div>
+    
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary text.text-center" id="btnContactoFormulario">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+</div>
 
     </section>
-    <footer class="bg-primary text-white">
+    <!-- footer-->
+    <footer class="bg-primary text-white fixed-bottom">
         <p class="text-center">Aplicación creada por: Millaray, Pablo, Pedro</p>
     </footer>
 
@@ -107,8 +146,7 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
     </script>
-    <script src="js/showCardsBarrio.js"></script>
+    <script src="js/contactoCrear.js"></script>
+    <script src="js/usuarioCrear.js"></script>
 </body>
-
-
 </html>
