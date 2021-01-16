@@ -19,7 +19,7 @@
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/main.html">Inicio</a>
                 <a class="nav-link" href="#">Login</a>
-                <a class="nav-link" href="/registrese.html">Crear Cuenta</a>
+                <a class="nav-link" href="#">Crear Cuenta</a>
             </div>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -28,33 +28,52 @@
         </button>
     </nav>
     <!-- Este es el hero section -->
-    <header >
+    <header>
         <div class="container px-5">
             <div class="text-white bg-black">
                 <h1 class="text-center pt-5">Mejora la imagen de tu barrio o territorio de la estigmatización</h1>
-                <p class="text-center px-5">Registrate en la página, y cuéntanos aspectos positivos de tu barrio, si existen iniciatvas que mejoran
-                    tu barrio, o personas que den vida a tu comunidad. También puedes aportar ideas para seguir mejorando la calidad de vida de tu entorno y tu comunidad
+                <p class="text-center px-5">Registrate en la página, y cuéntanos aspectos positivos de tu barrio, si
+                    existen iniciatvas que mejoran
+                    tu barrio, o personas que den vida a tu comunidad. También puedes aportar ideas para seguir
+                    mejorando la calidad de vida de tu entorno y tu comunidad
                 </p>
             </div>
         </div>
     </header>
-    <!-- Este es la busqueda de barrio -->
-    <div class="container">
-        <h2 class="text-center pt-3">Busque su Barrio</h2>
-        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-        <datalist id="datalistOptions">
-            <option value="San Francisco">
-            <option value="New York">
-            <option value="Seattle">
-            <option value="Los Angeles">
-            <option value="Chicago">
-        </datalist>
-    </div>
-
     <section class="container">
-        <h2 class="text-center">Aquí se muestra el barrio</h2>
-        <div class="row d-flex justify-content-between" id="show-barrios">
-        </div>
+        <h2 class="text-center">Registrate</h2>
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="inputNombreUsuario" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="inputNombreUsuario">
+            </div>
+            <div class="col-md-6">
+                <label for="inputApellidosUsuario" class="form-label">Apellidos</label>
+                <input type="text" class="form-control" id="inputApellidosUsuario">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="inputPassword4">
+            </div>
+            
+            <div class="col-md-6">
+                <label for="inputCity" class="form-label">Barrio o territorio</label>
+                <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="col-md-4">
+                <label for="inputState" class="form-label">Comuna</label>
+                <input type="text" class="form-control" id="inputCity">
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
+            </div>
+        </form>
+
+
     </section>
     <footer class="bg-primary text-white">
         <p class="text-center">Aplicación creada por: Millaray, Pablo, Pedro</p>
