@@ -27,6 +27,7 @@
                                 <input type="text" id="proyectoBarrio" class="form-control" placeholder="Barrio" />
                                 <input type="text" id="proyectoFechaInicio" class="form-control" placeholder="fechaInicio" />
                                 <input type="text" id="proyectoFechaFin" class="form-control" placeholder="fechaFin" />
+                                <br>
                                 <input type="text" id="proyectoDescripcion" class="form-control" placeholder="descripcion" />
                                 <input type="text" id="proyectoLikes" class="form-control" placeholder="likes" />
                                
@@ -42,6 +43,20 @@
 
         <!-- Proyecto listado -->
         <div class="col-md-6" id="proyectosContainer"></div>
+
+         <!-- Proyecto listado filtrado -->
+
+         <form id="proyectoFormularioBusqueda">
+            <div class="form-group">
+                <input type="text" id="proyectoBusqueda" class="form-control"
+                    placeholder="Nombre del proyecto" autofocus />
+            </div>
+          
+
+            <button class="btn btn-primary" id="btnProyectoFiltro">
+                buscar
+            </button>
+         <div class="col-md-6" id="proyectosContainerFiltrados"></div>
 
 
 

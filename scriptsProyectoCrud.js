@@ -10,7 +10,14 @@ let editStatus = false;
 let id = "";
 
 /// crear
-const guardarProyecto = (nombre, barrio, fechaInicio, fechaFin, descripcion, likes) =>
+const guardarProyecto = (
+  nombre,
+  barrio,
+  fechaInicio,
+  fechaFin,
+  descripcion,
+  likes
+) =>
   db.collection("proyectos").doc().set({
     nombre,
     barrio,
@@ -40,7 +47,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
 
     querySnapshot.forEach((doc) => {
       const proyecto = doc.data();
-  
+
       proyectosContainer.innerHTML += `
         
         <div class="card card-body mt-2 border-primary">
@@ -75,8 +82,6 @@ window.addEventListener("DOMContentLoaded", async (e) => {
         })
       );
 
-
-   
       // para editar
       const btnsEdit = proyectosContainer.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
@@ -86,9 +91,11 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const proyecto = doc.data();
             proyectoFormulario["proyectoNombre"].value = proyecto.nombre;
             proyectoFormulario["proyectoBarrio"].value = proyecto.barrio;
-            proyectoFormulario["proyectoFechaInicio"].value = proyecto.fechaInicio;
+            proyectoFormulario["proyectoFechaInicio"].value =
+              proyecto.fechaInicio;
             proyectoFormulario["proyectoFechaFin"].value = proyecto.fechaFin;
-            proyectoFormulario["proyectoDescripcion"].value = proyecto.descripcion;
+            proyectoFormulario["proyectoDescripcion"].value =
+              proyecto.descripcion;
             proyectoFormulario["proyectoLikes"].value = proyecto.likes;
 
             editStatus = true;
@@ -104,19 +111,17 @@ window.addEventListener("DOMContentLoaded", async (e) => {
   });
 });
 
- 
-   
 // para crear registros
 proyectoFormulario.addEventListener("submit", async (e) => {
   e.preventDefault();
- 
+
   const proyectoNombre = proyectoFormulario["proyectoNombre"];
   const proyectoBarrio = proyectoFormulario["proyectoBarrio"];
   const proyectoFechaInicio = proyectoFormulario["proyectoFechaInicio"];
   const proyectoFechaFin = proyectoFormulario["proyectoFechaFin"];
   const proyectoDescripcion = proyectoFormulario["proyectoDescripcion"];
   const proyectoLikes = proyectoFormulario["proyectoLikes"];
- 
+
   try {
     if (!editStatus) {
       await guardarProyecto(
@@ -125,8 +130,7 @@ proyectoFormulario.addEventListener("submit", async (e) => {
         proyectoFechaInicio.value,
         proyectoFechaFin.value,
         proyectoDescripcion.value,
-        proyectoLikes.value,
-
+        proyectoLikes.value
       );
     } else {
       await updateProyecto(id, {
@@ -136,7 +140,6 @@ proyectoFormulario.addEventListener("submit", async (e) => {
         fechaFin: proyectoFechaFin.value,
         descripcion: proyectoDescripcion.value,
         likes: proyectoLikes.value,
-
       });
 
       editStatus = false;
@@ -146,6 +149,41 @@ proyectoFormulario.addEventListener("submit", async (e) => {
 
     proyectoFormulario.reset();
     proyectoNombre.focus();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// muestra listado filtrados
+
+// para crear registros
+proyectoFormularioBusqueda.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const proyectoBusqueda = proyectoFormularioBusqueda["proyectoBusqueda"];
+  try {
+    await db
+      .collection("proyectos")
+      .where("barrio", "==", proyectoBusqueda.value)
+      .get()
+      .then(function (querySnapshot) {    
+        querySnapshot.forEach(function (doc) {
+          const proyecto = doc.data();
+          proyectosContainerFiltrados.innerHTML += `
+        
+    <div class="card card-body mt-2 border-primary">
+    <h3 class="h5">${proyecto.nombre}</h3>
+    <p>${proyecto.barrio}</p>
+    <p>${proyecto.fechaInicio}</p>
+    <p>${proyecto.fechaFin}</p>
+    <p>${proyecto.descripcion}</p>
+    <p>${proyecto.likes}</p>  
+  </div>
+  
+  `;
+        });
+      });
+
+    proyectoFormularioBusqueda.reset();
   } catch (error) {
     console.log(error);
   }
