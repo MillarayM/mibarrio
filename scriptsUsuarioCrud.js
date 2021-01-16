@@ -139,8 +139,8 @@ usuarioFormulario.addEventListener("submit", async (e) => {
       await updateUsuario(id, {
         nombre: usuarioNombre.value,
         apellido: usuarioApellido.value,
-        apellido: usuarioRut.value,
-        apellido: usuarioPassword.value,
+        rut: usuarioRut.value,
+        password: usuarioPassword.value,
         direccion: usuarioDireccion.value,
         email: usuarioEmail.value,
         telefono: usuarioTelefono.value,
