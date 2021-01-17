@@ -4,21 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lumen/bootstrap.min.css" integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX" crossorigin="anonymous">
     <link rel="stylesheet" href="style/style.css">
     <title>Mi Barrio</title>
 </head>
 
 <body>
     <!-- Este es el menú -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid col-6">
             <a class="navbar-brand" href="#">Mi Barrio</a>
         </div>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/main.html">Inicio</a>
                 <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="/comentarios.html">Comentar Barrios</a>
+                <a class="nav-link" href="/proyectos.html">Ver proyectos</a>
+                <a class="nav-link" href="#contactoFormulario">Contacto</a>
                 <a class="nav-link" href="/registrese.html">Crear Cuenta</a>
             </div>
         </div>
@@ -68,11 +71,40 @@
         <h2 class="text-center">Aquí se muestra el barrio</h2>
         <div class="row d-none justify-content-between" id="barriosCardsFiltro">
         </div>
-        <div class="row d-flex justify-content-between" id="barriosCardsGeneral">
+        <div class="row d-flex " id="barriosCardsGeneral">
         </div>
     </section>
+    <section id="contactanos" class="bg-info m-5 text-white">
 
-    <footer class="bg-primary text-white">
+        <h2 class="text-center">Tienes dudas? , Necesitas ayuda?, quieres inscribir tu proyecto?</h2>
+        <h2 class="text-center">Contáctanos</h2>
+
+        <div class="row justify-content-center m-3">
+            <form id="contactoFormulario" class="row">
+                <div class="form-group col-md-6">
+                    <label for="contactoNombre" class="form-label">Nombre </label>
+                    <input type="text" id="contactoNombre" class="form-control" placeholder="Nombre del contacto"
+                        autofocus />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="contactoEmail" class="form-label">email </label>
+                    <input type="email" id="contactoEmail" class="form-control" placeholder="Email">
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="contactoDetalle" class="form-label"> Tienes dudas? , Necesitas ayuda?, quieres inscribir tu proyecto?</label>
+                    <textarea input type="text" id="contactoDetalle" class="form-control" placeholder="Detalle"></textarea>
+                </div>
+    
+                <div class="col-12 text-center">
+                    <button class="btn btn-primary text.text-center" id="btnContactoFormulario">
+                        Enviar
+                    </button>
+                </div>
+            </form>
+</div>
+
+    </section>
+    <footer class="bg-primary text-white fixed-bottom">
         <p class="text-center">Aplicación creada por: Millaray, Pablo, Pedro</p>
     </footer>
 

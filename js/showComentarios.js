@@ -7,20 +7,20 @@ const listaOpcionesBarrios = document.getElementById("datalistOptions");
 const filtradorBarrios = document.getElementById("filtradorBarrios");
 
 //funciones firebase
-const getTasks = () => db.collection("proyectos").get();
-const onGetTasks = (callback) => db.collection("proyectos").onSnapshot(callback);
+const getTasks = () => db.collection("comentarios").get();
+const onGetTasks = (callback) => db.collection("comentarios").onSnapshot(callback);
 
 //plantilla barrios
 
 const plantillaBarrios = (
 	barrio
 ) => `<div class="card card-body mt-2 px-1 col-12 row d-flex flex-row border-primary">       
-        <h3 class="h5 col">${barrio.nombre}</h3>
-        <p class="col">${barrio.descripcion}</p>
-        <p class="col">${barrio.barrio}</p>
+        <h3 class="h5 col">${barrio.barrio}</h3>
+        <p class="col">${barrio.nombre}</p>
+        <p class="col">${barrio.detalle}</p>
     </div>`;
 
-//carga de cards de Proyectos
+//carga de cards de barrios
 window.addEventListener("DOMContentLoaded", (e) => {
 	onGetTasks((querySnapshot) => {
 		containerBarrios.innerHTML = "";
@@ -61,6 +61,7 @@ filtradorBarrios.addEventListener("input", async (e) => {
 	await filtrar();
 });
 
+
 const deleteBarrio = (divs) => {
 	let a = document.getElementById(divs);
 	while (a.firstChild) {
@@ -71,7 +72,7 @@ const deleteBarrio = (divs) => {
 const contactoFormulario = document.getElementById("contactoFormulario");
 const contactosContainer = document.getElementById("contactosContainer");
 
-/// crear
+
 /// crear
 const guardarContacto = (nombre, fecha, detalle, email,estado) =>
   db.collection("contactos").doc().set({
@@ -100,7 +101,8 @@ contactoFormulario.addEventListener("submit", async (e) => {
         contactoEmail.value,
         contactoEstado,
       );
-      contactoMensajeEnviado()
+    //alert('Tu consulta ha sido recibida gracias por escribir')
+    contactoMensajeEnviado()
 
     contactoFormulario.reset();
     contactoNombre.focus();
@@ -109,15 +111,15 @@ contactoFormulario.addEventListener("submit", async (e) => {
   }
 });
 
-const contactoMensajeEnviado = ()=>{
-  const divMensaje = 
-      `<div class="bg-success col-12 pb-3 text-center" id="borrarMensaje">
-          <h3>Mensaje enviado exitosamente</h3>
-      </div>`
-  contactoFormulario.insertAdjacentHTML('beforeend',divMensaje)
-  setTimeout(() => {
-      const idMensajeBorrar = document.getElementById('borrarMensaje')
-      contactoFormulario.removeChild(idMensajeBorrar)
-  }, 3000);
-}
 
+const contactoMensajeEnviado = ()=>{
+    const divMensaje = 
+        `<div class="bg-success col-12 pb-3 text-center" id="borrarMensaje">
+            <h3>Mensaje enviado exitosamente</h3>
+        </div>`
+    contactoFormulario.insertAdjacentHTML('beforeend',divMensaje)
+    setTimeout(() => {
+        const idMensajeBorrar = document.getElementById('borrarMensaje')
+        contactoFormulario.removeChild(idMensajeBorrar)
+    }, 3000);
+}

@@ -4,11 +4,12 @@
 }
 
 header {
-    height: 300px;
-    width: 100%;
     background-image: url('../img/barrio_hero_section.jpg');
     background-repeat: no-repeat;
     background-position: center;
+    height: 300px;
+    margin-top: 3.5rem;
+    width: 100%;
 }
 
 .bg-black{

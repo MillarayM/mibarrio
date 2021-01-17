@@ -14,8 +14,8 @@ const onGetTasks = (callback) => db.collection("barrios").onSnapshot(callback);
 
 const plantillaBarrios = (
 	barrio
-) => `<div class="card card-body mt-2 px-1 col-4 border-primary">
-        <img src=https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ03luuGw4KJi-L-9NoFeC3BWgS5LGnT4E6UA&usqp=CAU>
+) => `<div class="card card-body col-4 border-primary">            
+        <img src=${barrio.imagen} class="card-img-top" width="100%" height="50%">      
         <h3 class="h5">${barrio.nombre}</h3>
         <p>${barrio.comuna}</p>
         <p>${barrio.region}</p>
@@ -53,7 +53,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 		containerBarrios.innerHTML = "";
 		querySnapshot.forEach((doc) => {
 			const barrio = doc.data();
-			containerBarrios.innerHTML += plantillaBarrios(barrio, doc);
+			containerBarrios.insertAdjacentHTML("beforeend",plantillaBarrios(barrio));
 			listaOpcionesBarrios.insertAdjacentHTML(
 				"beforeend",
 				`<option value='${barrio.nombre}'>${barrio.nombre}</option>`
@@ -88,7 +88,6 @@ filtradorBarrios.addEventListener("input", async (e) => {
 	await filtrar();
 });
 
-//const seccionModal = document.getElementById("section-modales");
 const divInfoBarrios = document.getElementById("infoBarrios");
 const divInfoProyectos = document.getElementById("infoProyectos");
 
@@ -138,12 +137,12 @@ const mostrarBarrios = async (idDoc, id) => {
 						//divInfoProyectos.innerHTML = "";
 						tabla.insertAdjacentHTML(
 							"beforeend",
-							`<tr>
-                                <td>${res.nombre}</td>
-                                <td>${res.descripcion}</td>
-                                <td>${res.fechaInicio}</td>
-                                <td>${res.fechaFin}</td>                        
-                            </tr>`
+              `<tr>
+                  <td>${res.nombre}</td>
+                  <td>${res.descripcion}</td>
+                  <td>${res.fechaInicio}</td>
+                  <td>${res.fechaFin}</td>                        
+              </tr>`
 						);
 					});
                 })
@@ -159,3 +158,56 @@ const deleteBarrio = (divs) => {
 		a.removeChild(a.firstChild);
 	}
 };
+
+const contactoFormulario = document.getElementById("contactoFormulario");
+const contactosContainer = document.getElementById("contactosContainer");
+
+/// crear
+/// crear
+const guardarContacto = (nombre, fecha, detalle, email,estado) =>
+  db.collection("contactos").doc().set({
+    nombre,
+    fecha,
+    detalle,
+    email,
+    estado,
+  });
+
+// para crear registros
+contactoFormulario.addEventListener("submit", async (e) => {
+    e.preventDefault();
+ 
+    const contactoNombre = contactoFormulario["contactoNombre"];
+    const contactoFecha = new Date()
+    const contactoDetalle = contactoFormulario["contactoDetalle"];
+    const contactoEmail = contactoFormulario["contactoEmail"];
+    const contactoEstado = "Pendiente";
+
+  try {
+    await guardarContacto(
+        contactoNombre.value,
+        contactoFecha,
+        contactoDetalle.value,
+        contactoEmail.value,
+        contactoEstado,
+      );
+      contactoMensajeEnviado()
+
+    contactoFormulario.reset();
+    contactoNombre.focus();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+const contactoMensajeEnviado = ()=>{
+  const divMensaje = 
+      `<div class="bg-success col-12 pb-3 text-center" id="borrarMensaje">
+          <h3>Mensaje enviado exitosamente</h3>
+      </div>`
+  contactoFormulario.insertAdjacentHTML('beforeend',divMensaje)
+  setTimeout(() => {
+      const idMensajeBorrar = document.getElementById('borrarMensaje')
+      contactoFormulario.removeChild(idMensajeBorrar)
+  }, 3000);
+}
