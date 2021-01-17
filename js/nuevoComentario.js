@@ -40,3 +40,24 @@ comentarioFormulario.addEventListener("submit", async (e) => {
       console.log(error);
     }
   });
+
+
+
+  ///agregado Pablo
+  const listaOpcionesBarrios = document.getElementById("datalistOptions");
+
+  const getTasks = () => db.collection("barrios").get();
+const onGetTasks = (callback) => db.collection("barrios").onSnapshot(callback);
+
+window.addEventListener("DOMContentLoaded", (e) => {
+	onGetTasks((querySnapshot) => {
+    listaOpcionesBarrios.innerHTML = ""
+		querySnapshot.forEach((doc) => {
+			const proyectos = doc.data();
+			listaOpcionesBarrios.insertAdjacentHTML(
+				"beforeend",
+				`<option value='${proyectos.nombre}'>${proyectos.nombre}</option>`
+			);
+		});
+	});
+});

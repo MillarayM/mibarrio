@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 			containerBarrios.innerHTML += plantillaBarrios(proyectos);
 			listaOpcionesBarrios.insertAdjacentHTML(
 				"beforeend",
-				`<option value='${proyectos.nombre}'>${proyectos.nombre}</option>`
+				`<option value='${proyectos.barrio}'>${proyectos.barrio}</option>`
 			);
 		});
 	});
