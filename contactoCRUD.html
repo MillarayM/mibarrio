@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- INICIO CRUD contacto -->
+    <section class="p-5">
+      <h2>Administrador - Sección Contactos</h2>
+
+      <div class="row p-5">
+        <h2 class="h4">Administrador - Solicitud de Contacto</h2>
+        <div class="col-md-12">
+          <form id="contactoFormulario" class="row g-3">
+            <div class="form-group col-md-6">
+              <label for="contactoNombre" class="form-label"
+                >Nombre Contacto</label
+              >
+              <input
+                type="text"
+                id="contactoNombre"
+                class="form-control"
+                placeholder="Nombre del contacto"
+                autofocus
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="contactoFecha" class="form-label"
+                >Fecha de Ingreso</label
+              >
+              <input
+                type="text"
+                id="contactoFecha"
+                class="form-control"
+                placeholder="Fecha"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="contactoEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                id="contactoEmail"
+                class="form-control"
+                placeholder="Email"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="contactoEstado" class="form-label">Estado</label>
+              <input
+                type="text"
+                id="contactoEstado"
+                class="form-control"
+                placeholder="Estado"
+              />
+            </div>
+            <div class="form-group col-md-12">
+              <label for="contactoDetalle" class="form-label">Detalle</label>
+              <textarea
+                input
+                type="text"
+                id="contactoDetalle"
+                class="form-control"
+                placeholder="Detalle"
+              ></textarea>
+            </div>
+            <div class="form-group col-md-12">
+              <button class="btn btn-primary" id="btnContactoFormulario">
+                Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- listado de solicitud de contactos  intento tabla-->
+      <div class="row">
+        <div id="contactoContenedor" class="col-md-12">
+          <table id="contactoTablas" class="table table-striped bg-light">
+            <thead>
+              <tr>
+                <th scope="col">Nombre Contacto</th>
+                <th scope="col">Fecha de Ingreso</th>
+                <th scope="col">Email</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Detalle</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody id="contactoFilas"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <!-- FIN CRUD contacto -->
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBD9dBwvVCVL8-TbSBvXSJvj_8r3gX6kvE",
+        authDomain: "mibarrio-51942.firebaseapp.com",
+        projectId: "mibarrio-51942",
+        storageBucket: "mibarrio-51942.appspot.com",
+        messagingSenderId: "182863864432",
+        appId: "1:182863864432:web:c9afa25a99632538510ab5",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="scriptsContactoCrud.js"></script>
+  </body>
+</html>
