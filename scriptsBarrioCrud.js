@@ -49,7 +49,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
         <td> ${barrio.region}</td>
         <td> ${barrio.comuna}</td>
         <td> ${barrio.historial}</td>
-        <td> <img src="${barrio.imagen}" alt="barrop" width="300" height="300"></td>
+        <td> <img src="${barrio.imagen}" alt="barrop" width="200" height="200"></td>
         <td> <button class="btn btn-primary btn-delete" data-id="${doc.id}">
         🗑 Delete
       </button>
