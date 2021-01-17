@@ -3,10 +3,49 @@ $("#users, #comments, #projects, #neighborhood, #contacts").click((event) => {
   const id = `#${event.target.id}Section`;
   $("#sections").removeClass("d-none");
   $("#sections section").hide();
+  $("#pantallaLogIn").addClass("d-none");
   $(id).show();
 });
 
-// Scripts para CRUDS
+// Lóigca boton ingresar admin
+$("#botonIngresar").click(function (event) {
+  event.preventDefault();
+  const usuarioPassword = $("#pwd").val();
+  const usuarioMail = $("#mail").val();
+  if (
+    (usuarioMail == "privas@desafiolatam.cl" &&
+      usuarioPassword == "DesafioLATAM") ||
+    (usuarioMail == "pmorales@desafiolatam.cl" &&
+      usuarioPassword == "DesafioLATAM") ||
+    (usuarioMail == "mmariqueo@desafiolatam.cl" &&
+      usuarioPassword == "DesafioLATAM")
+  ) {
+    auth
+      .signInWithEmailAndPassword(usuarioMail, usuarioPassword)
+      .then((userCredential) => {
+        //
+        $("#dropdownButton").removeClass("d-none");
+        $("#botonLogin").hide();
+        $("#botonCrearCuenta").hide();
+        $("#bienvenida").hide();
+        $("#pantallaLogIn").removeClass("d-none");
+        $("#botonCerrarSesión").removeClass("d-none");
+      });
+  } else {
+    alert("Usuario no registrado como ADMIN");
+  }
+});
+///////////////////////Fin Script LOGIN///////////////////////////
+///////////////////////Inicio Script LOGOUT///////////////////////////
+$("#botonCerrarSesión").click(function () {
+  auth.signOut().then(() => {
+    $("#botonLogin").show();
+    console.log("sesion cerrada correctamente");
+  });
+});
+///////////////////////Fin Script LOGOUT///////////////////////////
+
+////////////////////////////////////////////////// Scripts para CRUDS //////////////////////////////////////////////////
 const db = firebase.firestore();
 let editStatus = false;
 let id = "";
@@ -175,7 +214,7 @@ usuarioFormulario.addEventListener("submit", async (e) => {
 
 //////////////Fin Scripts Usuarios/////////////////
 
-//////////////Scripts Comentarios/////////////////
+//////////////Scripts Comentarios/////////////  ////
 ////////////////////////////////////////
 ////////////  Para Comentarios  ////////////
 // nombre formulario : comentarioFormulario
