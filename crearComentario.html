@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Mi Barrio</title>
+</head>
+
+<body>
+    <!-- Este es el menú -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Mi Barrio</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="/main.html">Inicio</a>
+            </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <!-- Este es el hero section -->
+    <header>
+        <div class="container px-2">
+            <div class="text-white bg-black">
+                <h1 class="text-center pt-5">Mejora la imagen de tu barrio o territorio de la estigmatización</h1>
+                <p class="text-center px-5">Registrate en la página, y cuéntanos aspectos positivos de tu barrio, si
+                    existen iniciatvas que mejoran
+                    tu barrio, o personas que den vida a tu comunidad. También puedes aportar ideas para seguir
+                    mejorando la calidad de vida de tu entorno y tu comunidad
+                </p>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="container p-2">
+        <h2 class="text-center">Ingresa tu Comentario</h2>
+        <form id="comentarioFormulario" class="row g-3">
+            <div class="form-group col-md-6">
+                <label for="comentarioNombre" class="form-label">Nombre usuario</label>
+                <input type="text" id="comentarioNombre" class="form-control"
+                placeholder="Nombre Usuario" autofocus />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="comentarioFecha" class="form-label">Fecha de Ingreso</label>
+                <input type="text" id="comentarioFecha" class="form-control" placeholder="Fecha" />
+            </div>
+            <div class="form-group col-md-6">
+                <label for="comentarioBarrio" class="form-label">Nombre Barrio</label>
+                 <input type="text" id="comentarioBarrio" class="form-control" placeholder="Barrio" />
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="comentarioDetalle" class="form-label">Detalle</label>
+                <textarea  type="text" id="comentarioDetalle" class="form-control" placeholder="Detalle , comentario"></textarea>
+            </div>
+
+            <div class="form-group col-md-12">
+                <button class="btn btn-primary" id="btnComentarioFormulario">
+                    Guardar
+                </button>
+            </div>
+        </form>
+      
+
+
+    </section>
+
+    <div class="m-5 p-3">
+        <h2> </h2>
+    </div>
+
+    <!-- footer-->
+    <footer class="bg-primary text-white fixed-bottom">
+        <p class="text-center">Aplicación creada por: Millaray, Pablo, Pedro</p>
+    </footer>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+
+
+       
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBD9dBwvVCVL8-TbSBvXSJvj_8r3gX6kvE",
+            authDomain: "mibarrio-51942.firebaseapp.com",
+            projectId: "mibarrio-51942",
+            storageBucket: "mibarrio-51942.appspot.com",
+            messagingSenderId: "182863864432",
+            appId: "1:182863864432:web:c9afa25a99632538510ab5",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+
+    </script>
+
+
+
+    <script src="js/nuevoComentario.js"></script>
+</body>
+
+</html>
