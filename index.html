@@ -68,7 +68,84 @@
     </div>
     <!-- Inicio de secciones CRUD -->
     <div id="sections" class="d-none">
-      <section id="usersSection">Soy Usuarios</section>
+      <section id="usersSection">
+        <h1>Ingreso usuario test</h1>
+        <div class="container p-2">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h1 class="h4">Ingreso de Usuarios</h1>
+
+                  <form id="usuarioFormulario">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="usuarioNombre"
+                        class="form-control"
+                        placeholder="Nombre del usuario"
+                        autofocus
+                      />
+                    </div>
+                    <!--  // (nombre, apellido, dirección, email, telefono, barrio) -->
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        id="usuarioApellido"
+                        class="form-control"
+                        placeholder="Apellido"
+                      />
+                      <input
+                        type="text"
+                        id="usuarioRut"
+                        class="form-control"
+                        placeholder="Rut"
+                      />
+                      <input
+                        type="text"
+                        id="usuarioPassword"
+                        class="form-control"
+                        placeholder="Password"
+                      />
+                      <input
+                        type="text"
+                        id="usuarioDireccion"
+                        class="form-control"
+                        placeholder="Dirección"
+                      />
+                      <input
+                        type="text"
+                        id="usuarioEmail"
+                        class="form-control"
+                        placeholder="Email"
+                      />
+                      <input
+                        type="text"
+                        id="usuarioTelefono"
+                        class="form-control"
+                        placeholder="Teléfono"
+                      />
+                      <input
+                        type="text"
+                        id="usuarioBarrio"
+                        class="form-control"
+                        placeholder="Barrio"
+                      />
+                    </div>
+
+                    <button class="btn btn-primary" id="btnUsuarioFormulario">
+                      Guardar
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Usuario List -->
+            <div class="col-md-6" id="usuariosContainer"></div>
+          </div>
+        </div>
+      </section>
       <section id="commentsSection">Soy Comentarios</section>
       <section id="projectsSection">Soy Proyectos</section>
       <section id="neighborhoodSection">
