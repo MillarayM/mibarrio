@@ -9,42 +9,104 @@
       integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/minty/bootstrap.min.css"
+    />
     <title>Document</title>
   </head>
   <body>
-    <div class="dropdown">
-      <div class="dropdown">
-        <button
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-    </div>
-
     <div class="container">
-      <div id="botones">
-        <button id="users">usuarios</button>
-        <button id="comments">comentarios</button>
-        <button id="projects">proyectos</button>
-        <button id="neighborhood">barrios</button>
-        <button id="contacts">contactos</button>
+      <!-- Creando Dropdown con acciones de ADMIN -->
+      <div class="dropdown">
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Acciones Administrador
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" id="users">Editar Usuarios</a></li>
+            <li>
+              <a class="dropdown-item" id="comments">Editar Comentarios</a>
+            </li>
+            <li><a class="dropdown-item" id="projects">Editar Proyectos</a></li>
+            <li>
+              <a class="dropdown-item" id="neighborhood">Editar Barrios</a>
+            </li>
+            <li><a class="dropdown-item" id="contacts">Editar Contactos</a></li>
+          </ul>
+        </div>
       </div>
       <!-- Inicio de secciones CRUD -->
       <div id="sections" class="d-none">
         <section id="usersSection">Soy Usuarios</section>
         <section id="commentsSection">Soy Comentarios</section>
         <section id="projectsSection">Soy Proyectos</section>
-        <section id="neighborhoodSection">Soy Barrios</section>
+        <section id="neighborhoodSection">
+          <h1>Ingreso barrio test</h1>
+          <div class="container p-2">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h1 class="h4">Ingresa tu Barrio</h1>
+
+                    <form id="barrioFormulario">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          id="barrioNombre"
+                          class="form-control"
+                          placeholder="Nombre del Barrio"
+                          autofocus
+                        />
+                      </div>
+
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          id="barrioUbicacion"
+                          class="form-control"
+                          placeholder="Ubicación"
+                        />
+                        <input
+                          type="text"
+                          id="barrioRegion"
+                          class="form-control"
+                          placeholder="Region"
+                        />
+                        <input
+                          type="text"
+                          id="barrioComuna"
+                          class="form-control"
+                          placeholder="Comuna"
+                        />
+                        <input
+                          type="text"
+                          id="barrioHistorial"
+                          class="form-control"
+                          placeholder="Historial"
+                        />
+                      </div>
+
+                      <button class="btn btn-primary" id="btnBarrioFormulario">
+                        Guardar
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <!-- barrios List -->
+              <div class="col-md-6" id="barriosContainer"></div>
+            </div>
+          </div>
+        </section>
         <section id="contactsSection">Soy Contactos</section>
       </div>
     </div>
