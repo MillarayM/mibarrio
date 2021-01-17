@@ -9,62 +9,97 @@
 </head>
 
 <body>
-    <h1>Ingreso de proyectos</h1>
-    <div class="container p-2">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="h4">Ingreso de Proyectos</h1>
 
-                        <form id="proyectoFormulario">
-                            <div class="form-group">
-                                <input type="text" id="proyectoNombre" class="form-control"
-                                    placeholder="Nombre del proyecto" autofocus />
-                            </div>
-<!--  (nombre, barrio, fechaInicio, fechaFin, descripcion, likes) -->
-                            <div class="form-group">
-                                <input type="text" id="proyectoBarrio" class="form-control" placeholder="Barrio" />
-                                <input type="text" id="proyectoFechaInicio" class="form-control" placeholder="fechaInicio" />
-                                <input type="text" id="proyectoFechaFin" class="form-control" placeholder="fechaFin" />
-                                <br>
-                                <input type="text" id="proyectoDescripcion" class="form-control" placeholder="descripcion" />
-                                <input type="text" id="proyectoLikes" class="form-control" placeholder="likes" />
-                               
-                            </div>
+    <!-- INICIO CRUD proyectos -->
+    <section class="p-5">
+        <h2>Administrador - Sección Proyectos</h2>
 
-                            <button class="btn btn-primary" id="btnProyectoFormulario">
-                                Guardar
-                            </button>
-                        </form>
+        <div class="row p-5">
+            <h2 class="h4">Administrador - Solicitud de Proyectos</h2>
+            <div class="col-md-12">
+                <form id="proyectoFormulario" class="row g-3">
+                    <div class="form-group col-md-6">
+                        <label for="proyectoNombre" class="form-label">Nombre Proyecto</label>
+                        <input type="text" id="proyectoNombre" class="form-control" placeholder="Nombre del proyecto"
+                            autofocus />
+
                     </div>
-                </div>
+                    <div class="form-group col-md-6">
+                        <label for="proyectoBarrio" class="form-label">Nombre Barrio</label>
+                        <input type="text" id="proyectoBarrio" class="form-control" placeholder="Barrio" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="proyectoDescripcion" class="form-label">Descripcion</label>
+                        <textarea type="text" id="proyectoDescripcion" class="form-control"
+                            placeholder="descripcion"> </textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="proyectoLikes" class="form-label">Likes</label>
+                        <input type="text" id="proyectoLikes" class="form-control" placeholder="likes" />
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary" id="btnProyectoFormulario">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
             </div>
-
-        <!-- Proyecto listado -->
-        <div class="col-md-6" id="proyectosContainer"></div>
-
-         <!-- Proyecto listado filtrado -->
-
-         <form id="proyectoFormularioBusqueda">
-            <div class="form-group">
-                <input type="text" id="proyectoBusqueda" class="form-control"
-                    placeholder="Nombre del proyecto" autofocus />
-            </div>
-          
-
-            <button class="btn btn-primary" id="btnProyectoFiltro">
-                buscar
-            </button>
-         <div class="col-md-6" id="proyectosContainerFiltrados"></div>
-
-
-
         </div>
+
+    <!-- Proyecto listado -->
+    <div class="col-md-12 bg-info m-3 p-3" id="proyectosContainer">   
+        <form id="proyectoFormularioBusqueda">
+            <div class="form-group">
+                <label for="proyectoBusqueda" class="form-label">Burcar por nombre de Barrio</label>
+                <input type="text" id="proyectoBusqueda" class="form-control" placeholder="Nombre del Barrio" autofocus />
+            </div>
+            <button class="btn btn-primary" id="btnProyectoFiltro">
+                Buscar
+            </button>
+        </form>
+        <div class="row">
+            <div id="proyectoContenedorFiltrado" class="col-md-12 ">
+                <table id="proyectoTablasFiltrado" class="table table-striped bg-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre proyecto</th>
+                            <th scope="col">Nombre Barrio</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Likes</th>
+                            </tr>
+                    </thead>
+                    <tbody id="proyectoFilasFiltrado">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col-md-6" id="proyectosContainerFiltrados"></div>
     </div>
 
-
-
+        <!-- listado de solicitud de Proyectos  intento tabla-->
+        <div class="row">
+            <div id="proyectoContenedor" class="col-md-12 ">
+                <h3 class="p-5 text-center">Todos los Proyectos</h3>
+                <table id="proyectoTablas" class="table table-striped bg-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre proyecto</th>
+                            <th scope="col">Nombre Barrio</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Likes</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="proyectoFilas">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- FIN CRUD proyecto -->
 
 
 
@@ -93,5 +128,3 @@
 </body>
 
 </html>
-
-

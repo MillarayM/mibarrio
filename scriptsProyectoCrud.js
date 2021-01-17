@@ -4,7 +4,12 @@ const db = firebase.firestore();
 // nombre formulario : proyectoFormulario
 
 const proyectoFormulario = document.getElementById("proyectoFormulario");
-const proyectosContainer = document.getElementById("proyectosContainer");
+// const proyectosContainer = document.getElementById("proyectosContainer");
+const proyectoFilas = document.getElementById("proyectoFilas");
+const proyectoFilasFiltrado = document.getElementById("proyectoFilasFiltrado");
+
+
+proyectoFilasFiltrado
 
 let editStatus = false;
 let id = "";
@@ -13,16 +18,12 @@ let id = "";
 const guardarProyecto = (
   nombre,
   barrio,
-  fechaInicio,
-  fechaFin,
   descripcion,
   likes
 ) =>
   db.collection("proyectos").doc().set({
     nombre,
     barrio,
-    fechaInicio,
-    fechaFin,
     descripcion,
     likes,
   });
@@ -43,34 +44,30 @@ const updateProyecto = (id, updatedProyecto) =>
 // para mostrar en pantalla
 window.addEventListener("DOMContentLoaded", async (e) => {
   onGetProyectos((querySnapshot) => {
-    proyectosContainer.innerHTML = "";
+    proyectoFilas.innerHTML = "";
 
     querySnapshot.forEach((doc) => {
       const proyecto = doc.data();
 
-      proyectosContainer.innerHTML += `
+      proyectoFilas.innerHTML += `
         
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${proyecto.nombre}</h3>
-        <p>${proyecto.barrio}</p>
-        <p>${proyecto.fechaInicio}</p>
-        <p>${proyecto.fechaFin}</p>
-        <p>${proyecto.descripcion}</p>
-        <p>${proyecto.likes}</p>
-
-        <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
+      <tr>
+      <td>${proyecto.nombre}</td>
+      <td>${proyecto.barrio}</td>
+      <td>${proyecto.descripcion}</td>
+      <td>${proyecto.likes}</td>
+    
+      <td> <button class="btn btn-danger btn-delete" data-id="${doc.id}">
+      🗑 Delete
+    </button>
+    <button class="btn btn-warning btn-edit" data-id="${doc.id}">
+      🖉 Edit
+    </button></td>
+      </tr>
       
       `;
       // para borrar
-      const btnsDelete = proyectosContainer.querySelectorAll(".btn-delete");
+      const btnsDelete = proyectoFilas.querySelectorAll(".btn-delete");
       btnsDelete.forEach((btn) =>
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
@@ -83,7 +80,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
       );
 
       // para editar
-      const btnsEdit = proyectosContainer.querySelectorAll(".btn-edit");
+      const btnsEdit = proyectoFilas.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           try {
@@ -91,11 +88,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
             const proyecto = doc.data();
             proyectoFormulario["proyectoNombre"].value = proyecto.nombre;
             proyectoFormulario["proyectoBarrio"].value = proyecto.barrio;
-            proyectoFormulario["proyectoFechaInicio"].value =
-              proyecto.fechaInicio;
-            proyectoFormulario["proyectoFechaFin"].value = proyecto.fechaFin;
-            proyectoFormulario["proyectoDescripcion"].value =
-              proyecto.descripcion;
+            proyectoFormulario["proyectoDescripcion"].value = proyecto.descripcion;
             proyectoFormulario["proyectoLikes"].value = proyecto.likes;
 
             editStatus = true;
@@ -117,8 +110,6 @@ proyectoFormulario.addEventListener("submit", async (e) => {
 
   const proyectoNombre = proyectoFormulario["proyectoNombre"];
   const proyectoBarrio = proyectoFormulario["proyectoBarrio"];
-  const proyectoFechaInicio = proyectoFormulario["proyectoFechaInicio"];
-  const proyectoFechaFin = proyectoFormulario["proyectoFechaFin"];
   const proyectoDescripcion = proyectoFormulario["proyectoDescripcion"];
   const proyectoLikes = proyectoFormulario["proyectoLikes"];
 
@@ -127,8 +118,6 @@ proyectoFormulario.addEventListener("submit", async (e) => {
       await guardarProyecto(
         proyectoNombre.value,
         proyectoBarrio.value,
-        proyectoFechaInicio.value,
-        proyectoFechaFin.value,
         proyectoDescripcion.value,
         proyectoLikes.value
       );
@@ -136,8 +125,6 @@ proyectoFormulario.addEventListener("submit", async (e) => {
       await updateProyecto(id, {
         nombre: proyectoNombre.value,
         barrio: proyectoBarrio.value,
-        fechaInicio: proyectoFechaInicio.value,
-        fechaFin: proyectoFechaFin.value,
         descripcion: proyectoDescripcion.value,
         likes: proyectoLikes.value,
       });
@@ -168,16 +155,15 @@ proyectoFormularioBusqueda.addEventListener("submit", async (e) => {
       .then(function (querySnapshot) {    
         querySnapshot.forEach(function (doc) {
           const proyecto = doc.data();
-          proyectosContainerFiltrados.innerHTML += `
+          proyectoFilasFiltrado.innerHTML += `
+          <tr>
+      <td>${proyecto.nombre}</td>
+      <td>${proyecto.barrio}</td>
+      <td>${proyecto.descripcion}</td>
+      <td>${proyecto.likes}</td>
+      </tr>
         
-    <div class="card card-body mt-2 border-primary">
-    <h3 class="h5">${proyecto.nombre}</h3>
-    <p>${proyecto.barrio}</p>
-    <p>${proyecto.fechaInicio}</p>
-    <p>${proyecto.fechaFin}</p>
-    <p>${proyecto.descripcion}</p>
-    <p>${proyecto.likes}</p>  
-  </div>
+
   
   `;
         });
