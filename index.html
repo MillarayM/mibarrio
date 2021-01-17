@@ -208,7 +208,97 @@
           </div>
         </div>
       </section>
-      <section id="contactsSection">Soy Contactos</section>
+      <section id="contactsSection">
+        <!-- INICIO CRUD contacto -->
+        <section class="p-5">
+          <h2>Administrador - Sección Contactos</h2>
+
+          <div class="row p-5">
+            <h2 class="h4">Administrador - Solicitud de Contacto</h2>
+            <div class="col-md-12">
+              <form id="contactoFormulario" class="row g-3">
+                <div class="form-group col-md-6">
+                  <label for="contactoNombre" class="form-label"
+                    >Nombre Contacto</label
+                  >
+                  <input
+                    type="text"
+                    id="contactoNombre"
+                    class="form-control"
+                    placeholder="Nombre del contacto"
+                    autofocus
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="contactoFecha" class="form-label"
+                    >Fecha de Ingreso</label
+                  >
+                  <input
+                    type="text"
+                    id="contactoFecha"
+                    class="form-control"
+                    placeholder="Fecha"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="contactoEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="contactoEmail"
+                    class="form-control"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="contactoEstado" class="form-label">Estado</label>
+                  <input
+                    type="text"
+                    id="contactoEstado"
+                    class="form-control"
+                    placeholder="Estado"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="contactoDetalle" class="form-label"
+                    >Detalle</label
+                  >
+                  <textarea
+                    input
+                    type="text"
+                    id="contactoDetalle"
+                    class="form-control"
+                    placeholder="Detalle"
+                  ></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                  <button class="btn btn-primary" id="btnContactoFormulario">
+                    Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- listado de solicitud de contactos  intento tabla-->
+          <div class="row">
+            <div id="contactoContenedor" class="col-md-12">
+              <table id="contactoTablas" class="table table-striped bg-light">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre Contacto</th>
+                    <th scope="col">Fecha de Ingreso</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody id="contactoFilas"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <!-- FIN CRUD contacto -->
+      </section>
     </div>
 
     <!-- Scripts de Bootstrap -->
