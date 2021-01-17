@@ -32,8 +32,6 @@ const plantillaProyectos = () => {
     <tr>
         <th scope="col">Nombre proyecto</th>
         <th scope="col">Descripcion</th>
-        <th scope="col">Fecha inicio</th>
-        <th scope="col">Fecha Fin</th>
     </tr>
     </thead>
     <tbody id= "tablaProyectos">                  
@@ -140,9 +138,7 @@ const mostrarBarrios = async (idDoc, id) => {
 							"beforeend",
 							`<tr>
                   <td>${res.nombre}</td>
-                  <td>${res.descripcion}</td>
-                  <td>${res.fechaInicio}</td>
-                  <td>${res.fechaFin}</td>                        
+                  <td>${res.descripcion}</td>                  
               </tr>`
 						);
 					});
