@@ -1,5 +1,3 @@
-const db = firebase.firestore();
-
 //div contenedores
 const containerBarrios = document.getElementById("barriosCardsGeneral");
 const containerBarriosFiltro = document.getElementById("barriosCardsFiltro");
@@ -24,8 +22,8 @@ const plantillaBarrios = (
             <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal2" onclick="mostrarBarrios('${barrio.nombre}',2)">Ver Proyectos</button>
         </div>
     </div>`;
-const plantillaProyectos = ()=>{
-    return `<div class="modal-header">
+const plantillaProyectos = () => {
+	return `<div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">Listado Proyectos</h5>
 </div>
 <div class="modal-body">
@@ -44,8 +42,8 @@ const plantillaProyectos = ()=>{
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick= deleteBarrio("infoBarrios")>Cerrar</button>
-</div>`
-}
+</div>`;
+};
 
 //carga de cards de barrios
 window.addEventListener("DOMContentLoaded", (e) => {
@@ -53,7 +51,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
 		containerBarrios.innerHTML = "";
 		querySnapshot.forEach((doc) => {
 			const barrio = doc.data();
-			containerBarrios.insertAdjacentHTML("beforeend",plantillaBarrios(barrio));
+			containerBarrios.insertAdjacentHTML(
+				"beforeend",
+				plantillaBarrios(barrio)
+			);
 			listaOpcionesBarrios.insertAdjacentHTML(
 				"beforeend",
 				`<option value='${barrio.nombre}'>${barrio.nombre}</option>`
@@ -91,7 +92,7 @@ filtradorBarrios.addEventListener("input", async (e) => {
 const divInfoBarrios = document.getElementById("infoBarrios");
 const divInfoProyectos = document.getElementById("infoProyectos");
 
-const mostrarBarrios = async (idDoc, id) => {    
+const mostrarBarrios = async (idDoc, id) => {
 	try {
 		if (id == 1) {
 			await db
@@ -100,7 +101,7 @@ const mostrarBarrios = async (idDoc, id) => {
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach(function (doc) {
-                        const resultado = doc.data();
+						const resultado = doc.data();
 						divInfoBarrios.innerHTML = "";
 						divInfoBarrios.insertAdjacentHTML(
 							"beforeend",
@@ -122,22 +123,22 @@ const mostrarBarrios = async (idDoc, id) => {
 				});
 		}
 		if (id == 2) {
-            const plantilla = plantillaProyectos()
-            divInfoProyectos.innerHTML = "";
-            divInfoProyectos.insertAdjacentHTML("beforeend",plantilla)
-            const tabla = document.getElementById("tablaProyectos")
+			const plantilla = plantillaProyectos();
+			divInfoProyectos.innerHTML = "";
+			divInfoProyectos.insertAdjacentHTML("beforeend", plantilla);
+			const tabla = document.getElementById("tablaProyectos");
 			await db
 				.collection("proyectos")
 				.where("barrio", "==", idDoc)
 				.get()
 				.then((querySnapshot) => {
 					querySnapshot.forEach(function (doc) {
-                        const res = doc.data();
-                        console.log(res)
+						const res = doc.data();
+						console.log(res);
 						//divInfoProyectos.innerHTML = "";
 						tabla.insertAdjacentHTML(
 							"beforeend",
-              `<tr>
+							`<tr>
                   <td>${res.nombre}</td>
                   <td>${res.descripcion}</td>
                   <td>${res.fechaInicio}</td>
@@ -145,7 +146,7 @@ const mostrarBarrios = async (idDoc, id) => {
               </tr>`
 						);
 					});
-                })
+				});
 		}
 	} catch (error) {
 		console.log("hubo un error", error);
@@ -164,50 +165,134 @@ const contactosContainer = document.getElementById("contactosContainer");
 
 /// crear
 /// crear
-const guardarContacto = (nombre, fecha, detalle, email,estado) =>
-  db.collection("contactos").doc().set({
-    nombre,
-    fecha,
-    detalle,
-    email,
-    estado,
-  });
+const guardarContacto = (nombre, fecha, detalle, email, estado) =>
+	db.collection("contactos").doc().set({
+		nombre,
+		fecha,
+		detalle,
+		email,
+		estado,
+	});
 
 // para crear registros
 contactoFormulario.addEventListener("submit", async (e) => {
-    e.preventDefault();
- 
-    const contactoNombre = contactoFormulario["contactoNombre"];
-    const contactoFecha = new Date()
-    const contactoDetalle = contactoFormulario["contactoDetalle"];
-    const contactoEmail = contactoFormulario["contactoEmail"];
-    const contactoEstado = "Pendiente";
+	e.preventDefault();
 
-  try {
-    await guardarContacto(
-        contactoNombre.value,
-        contactoFecha,
-        contactoDetalle.value,
-        contactoEmail.value,
-        contactoEstado,
-      );
-      contactoMensajeEnviado()
+	const contactoNombre = contactoFormulario["contactoNombre"];
+	const contactoFecha = new Date();
+	const contactoDetalle = contactoFormulario["contactoDetalle"];
+	const contactoEmail = contactoFormulario["contactoEmail"];
+	const contactoEstado = "Pendiente";
 
-    contactoFormulario.reset();
-    contactoNombre.focus();
-  } catch (error) {
-    console.log(error);
-  }
+	try {
+		await guardarContacto(
+			contactoNombre.value,
+			contactoFecha,
+			contactoDetalle.value,
+			contactoEmail.value,
+			contactoEstado
+		);
+		contactoMensajeEnviado(
+			contactoFormulario,
+			"Mensaje enviado exitosamente",
+			'success'
+		);
+
+		contactoFormulario.reset();
+		contactoNombre.focus();
+	} catch (error) {
+		console.log(error);
+	}
 });
 
-const contactoMensajeEnviado = ()=>{
-  const divMensaje = 
-      `<div class="bg-success col-12 pb-3 text-center" id="borrarMensaje">
-          <h3>Mensaje enviado exitosamente</h3>
-      </div>`
-  contactoFormulario.insertAdjacentHTML('beforeend',divMensaje)
-  setTimeout(() => {
-      const idMensajeBorrar = document.getElementById('borrarMensaje')
-      contactoFormulario.removeChild(idMensajeBorrar)
-  }, 3000);
-}
+const contactoMensajeEnviado = (divContenedorMensaje, mensaje, color) => {
+    const divMensaje = 
+        `<div class="bg-${color} text-white col-12 pb-3 text-center" id="borrarMensaje">
+            <h3>${mensaje}</h3>
+        </div>`;
+	divContenedorMensaje.insertAdjacentHTML("beforeend", divMensaje);
+	setTimeout(() => {
+		const idMensajeBorrar = document.getElementById("borrarMensaje");
+		divContenedorMensaje.removeChild(idMensajeBorrar);
+	}, 5000);
+};
+
+//----------------------------------------------------
+
+const sinLogin = document.querySelectorAll(".logged-out");
+const conLogin = document.querySelectorAll(".logged-in");
+const modalLoginMaqueta = document.getElementById("loginModal");
+const containerAlert = document.getElementById("containerAlert");
+
+const verificarLogin = (user) => {
+	if (user) {
+		conLogin.forEach((link) => (link.style.display = "block"));
+		sinLogin.forEach((link) => (link.style.display = "none"));
+	} else {
+		conLogin.forEach((link) => (link.style.display = "none"));
+		sinLogin.forEach((link) => (link.style.display = "block"));
+	}
+};
+
+// login usuario
+
+const formularioLogin = document.querySelector("#formularioLogin");
+formularioLogin.addEventListener("submit", (e) => {
+	e.preventDefault();
+
+	const datosEmail = document.querySelector("#loginEmail").value;
+	const datosPassword = document.querySelector("#loginPassword").value;
+	console.log(datosEmail, datosPassword);
+
+	auth
+		.signInWithEmailAndPassword(datosEmail, datosPassword)
+		.then((userCredential) => {
+			formularioLogin.reset();
+			window.location.reload();
+		})
+		.catch(() => {
+			formularioLogin.reset();
+			const containerErrorLogin = document.getElementById(
+				"containerErrorLogin"
+			);
+			contactoMensajeEnviado(
+				containerErrorLogin,
+				"Contraseña o pass incorrecta, intente nuevamente",
+				"danger"
+			);
+		});
+});
+
+// cierrre de sesion
+const cerrarSesion = document.querySelector("#cerrarSesion");
+cerrarSesion.addEventListener("click", (e) => {
+	e.preventDefault();
+
+	auth.signOut().then(() => {
+		contactoMensajeEnviado(
+			containerAlert,
+			"Sesion cerrada correctamente",
+			"success"
+		);
+	});
+});
+
+// eventos
+// listas de cosas que pueden hacer cuando estan logeados
+
+// verificar persistencia del loginn ....
+auth.onAuthStateChanged((user) => {
+	if (user) {
+		contactoMensajeEnviado(containerAlert, "Sesión iniciada", "success");
+		console.log("hay un usuario esta logeado"); //colocar mensaje html div bienvenida
+	} else {
+		contactoMensajeEnviado(
+			containerAlert,
+			"Te invitamos a inscribirte a la página",
+			"info"
+		);
+		console.log("no hay usuario logeado"); //mensaje te invitamos a que te unas a la página o algo así.
+		//listadoComentariosHtml([])
+		verificarLogin(user);
+	}
+});

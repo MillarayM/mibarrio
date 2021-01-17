@@ -11,18 +11,22 @@
 
 <body>
     <!-- Este es el menú -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid col-6">
             <a class="navbar-brand" href="#">Mi Barrio</a>
         </div>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/main.html">Inicio</a>
-                <a class="nav-link" href="#">Login</a>
-                <a class="nav-link" href="#">Crear Cuenta</a>
+                <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="logearse" style="display: none;">Login</a>
+                <a class="nav-link logged-in" href="#">Comentar Barrios</a>
+                <a class="nav-link logged-in" href="/proyectos.html">Inscribir proyectos</a>
+                <a class="nav-link logged-out" href="/registrese.html" style="display: none;">Crear Cuenta</a>
+                <a class="nav-link" href="#contactoFormulario">Contacto</a>
+                <a class="nav-link logged-in" id="cerrarSesion" href="#" >Cerrar Sesion</a>
             </div>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,42 +44,91 @@
             </div>
         </div>
     </header>
-    <section class="container">
+    <div id="containerAlert"></div>
+    
+    <!-- botones navegacion -->
+    <div class="mt-3 text-center">
+        <a href="/main.html" class="btn btn-warning">Ver Barrios</a>
+        <a href="/proyectos.html" class="btn btn-warning">Ver Proyectos</a>
+        <a href="/comentarios.html" class="btn btn-warning">Ver Comentarios barrios</a>
+    </div>
+
+    <!-- Modal logear-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login Usuario</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioLogin">
+                        <div class="form-group">
+                            <input type="text" id="loginEmail" class="form-control" placeholder="Correo Electronico"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Acceder</button>
+                        <button class="btn btn-secondary"> <a href="registrese.html">Ingresar como admin</a></button>
+                        <div id="containerErrorLogin"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="container p-2">
         <h2 class="text-center">Registrate</h2>
-        <form class="row g-3">
-            <div class="col-md-6">
-                <label for="inputNombreUsuario" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="inputNombreUsuario">
+        <form id="usuarioFormulario" class="row g-3">
+            <div class="form-group col-md-3">
+                <label for="usuarioNombre" class="form-label">Nombre</label>
+                <input type="text" id="usuarioNombre" class="form-control" placeholder="Nombre del usuario" autofocus />
             </div>
-            <div class="col-md-6">
-                <label for="inputApellidosUsuario" class="form-label">Apellidos</label>
-                <input type="text" class="form-control" id="inputApellidosUsuario">
+            <div class="form-group col-md-3">
+                <label for="usuarioApellido" class="form-label">Apellidos</label>
+                <input type="text" id="usuarioApellido" class="form-control" placeholder="Apellido" />
             </div>
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail4">
+            <div class="form-group col-md-3">
+                <label for="usuarioRut" class="form-label">Rut</label>
+                <input type="text" id="usuarioRut" class="form-control" placeholder="Rut" />
             </div>
-            <div class="col-md-6">
-                <label for="inputPassword4" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="inputPassword4">
+
+            <div class="form-group col-md-3">
+                <label for="usuarioTelefono" class="form-label">Teléfono</label>
+                <input type="text" id="usuarioTelefono" class="form-control" placeholder="Teléfono" />
             </div>
-            
-            <div class="col-md-6">
-                <label for="inputCity" class="form-label">Barrio o territorio</label>
-                <input type="text" class="form-control" id="inputCity">
+            <div class="form-group col-md-6">
+                <label for="usuarioBarrio" class="form-label">Barrio o territorio</label>
+                <input type="text" id="usuarioBarrio" class="form-control" placeholder="Barrio" />
             </div>
-            <div class="col-md-4">
-                <label for="inputState" class="form-label">Comuna</label>
-                <input type="text" class="form-control" id="inputCity">
+
+            <div class="form-group col-md-6">
+                <label for="usuarioDireccion" class="form-label">Dirección</label>
+                <input type="text" id="usuarioDireccion" class="form-control" placeholder="Dirección" />
             </div>
-            <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary mt-3">Registrarse</button>
+            <div class="form-group col-md-6">
+                <label for="usuarioEmail" class="form-label">Email</label>
+                <input type="email" id="usuarioEmail" class="form-control" placeholder="Email" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="usuarioPassword" class="form-label">Contraseña</label>
+                <input type="password" id="usuarioPassword" class="form-control" placeholder="Password" />
+            </div>
+
+
+            <div class="col-3 text-center">
+                <button class="btn btn-primary" id="btnUsuarioFormulario"> Registrate</button>
             </div>
         </form>
-
-
     </section>
-    <footer class="bg-primary text-white">
+
+    <!-- <div class="m-5 p-5">
+        <h2>Bienvenido a Mi barrio</h2>
+    </div> -->
+
+    <!-- footer-->
+    <footer class="bg-primary text-white fixed-bottom">
         <p class="text-center">Aplicación creada por: Millaray, Pablo, Pedro</p>
     </footer>
 
@@ -87,12 +140,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
+
+
+       
+
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+ https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
 
     <script>
         // Your web app's Firebase configuration
@@ -106,9 +164,14 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-    </script>
-    <script src="js/showCardsBarrio.js"></script>
-</body>
+        const auth = firebase.auth();
 
+
+    </script>
+
+
+
+    <script src="/js/usuarioCrear.js"></script>
+</body>
 
 </html>

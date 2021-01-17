@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lumen/bootstrap.min.css" integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/lumen/bootstrap.min.css"
+        integrity="sha384-GzaBcW6yPIfhF+6VpKMjxbTx6tvR/yRd/yJub90CqoIn2Tz4rRXlSpTFYMKHCifX" crossorigin="anonymous">
     <link rel="stylesheet" href="style/style.css">
     <title>Mi Barrio</title>
 </head>
@@ -18,14 +19,15 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/main.html">Inicio</a>
-                <a class="nav-link" href="#">Login</a>
-                <a class="nav-link" href="/comentarios.html">Comentar Barrios</a>
-                <a class="nav-link" href="/proyectos.html">Ver proyectos</a>
+                <a class="nav-link logged-out" href="#" data-bs-toggle="modal" data-bs-target="#loginModal" id="logearse" style="display: none;">Login</a>
+                <a class="nav-link logged-in" href="#">Comentar Barrios</a>
+                <a class="nav-link logged-in" href="/proyectos.html">Inscribir proyectos</a>
+                <a class="nav-link logged-out" href="/registrese.html" style="display: none;">Crear Cuenta</a>
                 <a class="nav-link" href="#contactoFormulario">Contacto</a>
-                <a class="nav-link" href="/registrese.html">Crear Cuenta</a>
+                <a class="nav-link logged-in" id="cerrarSesion" href="#" >Cerrar Sesion</a>
             </div>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,8 +45,39 @@
             </div>
         </div>
     </header>
+    <div id="containerAlert"></div>
+    <!-- Modal logear-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Login Usuario</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="formularioLogin">
+                        <div class="form-group">
+                            <input type="text" id="loginEmail" class="form-control" placeholder="Correo Electronico"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña"
+                                required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Acceder</button>
+                        <button class="btn btn-secondary"> <a href="registrese.html">Ingresar como admin</a></button>
+                        <div id="containerErrorLogin"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Este es la busqueda de barrio -->
     <div class="container">
+        <div class="mt-3 text-center">
+            <a href="/main.html" class="btn btn-warning">Ver Barrios</a>
+            <a href="/proyectos.html" class="btn btn-warning">Ver Proyectos</a>
+            <a href="/comentarios.html" class="btn btn-warning">Ver Comentarios barrios</a>
+        </div>
         <h2 class="text-center pt-3">Busque su Barrio</h2>
         <input class="form-control" list="datalistOptions" id="filtradorBarrios" placeholder="Type to search...">
         <datalist id="datalistOptions">
@@ -91,17 +124,19 @@
                     <input type="email" id="contactoEmail" class="form-control" placeholder="Email">
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="contactoDetalle" class="form-label"> Tienes dudas? , Necesitas ayuda?, quieres inscribir tu proyecto?</label>
-                    <textarea input type="text" id="contactoDetalle" class="form-control" placeholder="Detalle"></textarea>
+                    <label for="contactoDetalle" class="form-label"> Tienes dudas? , Necesitas ayuda?, quieres inscribir
+                        tu proyecto?</label>
+                    <textarea input type="text" id="contactoDetalle" class="form-control"
+                        placeholder="Detalle"></textarea>
                 </div>
-    
+
                 <div class="col-12 text-center">
                     <button class="btn btn-primary text.text-center" id="btnContactoFormulario">
                         Enviar
                     </button>
                 </div>
             </form>
-</div>
+        </div>
 
     </section>
     <footer class="bg-primary text-white fixed-bottom">
@@ -117,25 +152,28 @@
         integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
         crossorigin="anonymous"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-    https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
 
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyBD9dBwvVCVL8-TbSBvXSJvj_8r3gX6kvE",
-            authDomain: "mibarrio-51942.firebaseapp.com",
-            projectId: "mibarrio-51942",
-            storageBucket: "mibarrio-51942.appspot.com",
-            messagingSenderId: "182863864432",
-            appId: "1:182863864432:web:c9afa25a99632538510ab5",
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyBD9dBwvVCVL8-TbSBvXSJvj_8r3gX6kvE",
+        authDomain: "mibarrio-51942.firebaseapp.com",
+        projectId: "mibarrio-51942",
+        storageBucket: "mibarrio-51942.appspot.com",
+        messagingSenderId: "182863864432",
+        appId: "1:182863864432:web:c9afa25a99632538510ab5",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+        const db = firebase.firestore();
+</script>
     <script src="js/showCardsBarrio.js"></script>
 </body>
 
