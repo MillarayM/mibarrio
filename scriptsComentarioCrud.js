@@ -4,7 +4,10 @@ const db = firebase.firestore();
 // nombre formulario : comentarioFormulario
 
 const comentarioFormulario = document.getElementById("comentarioFormulario");
-const comentariosContainer = document.getElementById("comentariosContainer");
+// const comentariosContainer = document.getElementById("comentariosContainer");
+const comentarioFilas = document.getElementById("comentarioFilas");
+
+
 
 let editStatus = false;
 let id = "";
@@ -34,31 +37,24 @@ const updateComentario = (id, updatedComentario) =>
 // para mostrar en pantalla
 window.addEventListener("DOMContentLoaded", async (e) => {
   onGetComentarios((querySnapshot) => {
-    comentariosContainer.innerHTML = "";
+    comentarioFilas.innerHTML = "";
 
     querySnapshot.forEach((doc) => {
       const comentario = doc.data();
      // (usuario, fecha, comentarioUsuario, barrio)
-      comentariosContainer.innerHTML += `
-        
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${comentario.nombre}</h3>
-        <p>${comentario.fecha}</p>
-        <p>${comentario.detalle}</p>
-        <p>${comentario.barrio}</p>
-         <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
+      comentarioFilas.innerHTML += `
+        <tr>
+        <td> ${comentario.nombre}</td>
+        <td> ${comentario.fecha}</td>
+        <td> ${comentario.detalle}</td>
+        <td> ${comentario.barrio}</td>
+        <td>  <button class="btn btn-primary btn-delete" data-id="${doc.id}"> 🗑 Delete </button>
+      <button class="btn btn-secondary btn-edit" data-id="${doc.id}"> 🖉 Edit </button> </td>        
+        </tr>
       
       `;
       // para borrar
-      const btnsDelete = comentariosContainer.querySelectorAll(".btn-delete");
+      const btnsDelete = comentarioFilas.querySelectorAll(".btn-delete");
       btnsDelete.forEach((btn) =>
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
@@ -73,7 +69,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
 
 
       // para editar
-      const btnsEdit = comentariosContainer.querySelectorAll(".btn-edit");
+      const btnsEdit = comentarioFilas.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           try {

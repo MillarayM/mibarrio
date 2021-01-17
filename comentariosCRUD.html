@@ -9,42 +9,65 @@
 </head>
 
 <body>
-    <h1>Ingreso comentario </h1>
-    <div class="container p-2">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="h4">Ingreso de Comentarios</h1>
 
-                        <form id="comentarioFormulario">
-                            <div class="form-group">
-                                <input type="text" id="comentarioNombre" class="form-control"
-                                    placeholder="Nombre Usuario" autofocus />
-                            </div>
-<!--  //(nombre, fecha, detalle, barrio) -->
-                            <div class="form-group">
-                                <input type="text" id="comentarioFecha" class="form-control" placeholder="Fecha" />
-                                <input type="text" id="comentarioDetalle" class="form-control" placeholder="Detalle , comentario" />
-                                <input type="text" id="comentarioBarrio" class="form-control" placeholder="Barrio" />
+<!-- INICIO CRUD comentario -->
+<section class="p-5">
+    <h2>Administrador - Sección Comentarios</h2>
 
-                            </div>
-
-                            <button class="btn btn-primary" id="btnComentarioFormulario">
-                                Guardar
-                            </button>
-                        </form>
-                    </div>
+    <div class="row p-5">
+        <h2 class="h4">Administrador - Solicitud de comentario</h2>
+        <div class="col-md-12">
+            <form id="comentarioFormulario" class="row g-3">
+                <div class="form-group col-md-6">
+                    <label for="comentarioNombre" class="form-label">Nombre usuario</label>
+                    <input type="text" id="comentarioNombre" class="form-control"
+                    placeholder="Nombre Usuario" autofocus />
                 </div>
-            </div>
+                <div class="form-group col-md-6">
+                    <label for="comentarioFecha" class="form-label">Fecha de Ingreso</label>
+                    <input type="text" id="comentarioFecha" class="form-control" placeholder="Fecha" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="comentarioBarrio" class="form-label">Nombre Barrio</label>
+                     <input type="text" id="comentarioBarrio" class="form-control" placeholder="Barrio" />
+                </div>
 
-        <!-- Listado de comentarios -->
-        <div class="col-md-6" id="comentariosContainer"></div>
+                <div class="form-group col-md-6">
+                    <label for="comentarioDetalle" class="form-label">Detalle</label>
+                    <textarea  type="text" id="comentarioDetalle" class="form-control" placeholder="Detalle , comentario"></textarea>
+                </div>
 
-
-
+                <div class="form-group col-md-12">
+                    <button class="btn btn-primary" id="btnComentarioFormulario">
+                        Guardar
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
+    <!-- listado de solicitud de Comentarios intento tabla-->
+    <div class="row">
+        <div id="comentarioContenedor" class="col-md-12 ">
+            <table id="comentarioTablas" class="table table-striped bg-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre usuario</th>
+                        <th scope="col">Fecha de Ingreso</th>
+                        <th scope="col">Barrio</th>
+                          <th scope="col">Detalle</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="comentarioFilas">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<!-- FIN CRUD comentario -->
+
+
+
 
 
 
