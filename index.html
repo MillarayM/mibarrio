@@ -69,291 +69,490 @@
     <!-- Inicio de secciones CRUD -->
     <div id="sections" class="d-none">
       <section id="usersSection">
-        <h1>Ingreso usuario test</h1>
-        <div class="container p-2">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="h4">Ingreso de Usuarios</h1>
-
-                  <form id="usuarioFormulario">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        id="usuarioNombre"
-                        class="form-control"
-                        placeholder="Nombre del usuario"
-                        autofocus
-                      />
-                    </div>
-                    <!--  // (nombre, apellido, dirección, email, telefono, barrio) -->
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        id="usuarioApellido"
-                        class="form-control"
-                        placeholder="Apellido"
-                      />
-                      <input
-                        type="text"
-                        id="usuarioRut"
-                        class="form-control"
-                        placeholder="Rut"
-                      />
-                      <input
-                        type="text"
-                        id="usuarioPassword"
-                        class="form-control"
-                        placeholder="Password"
-                      />
-                      <input
-                        type="text"
-                        id="usuarioDireccion"
-                        class="form-control"
-                        placeholder="Dirección"
-                      />
-                      <input
-                        type="text"
-                        id="usuarioEmail"
-                        class="form-control"
-                        placeholder="Email"
-                      />
-                      <input
-                        type="text"
-                        id="usuarioTelefono"
-                        class="form-control"
-                        placeholder="Teléfono"
-                      />
-                      <input
-                        type="text"
-                        id="usuarioBarrio"
-                        class="form-control"
-                        placeholder="Barrio"
-                      />
-                    </div>
-
-                    <button class="btn btn-primary" id="btnUsuarioFormulario">
-                      Guardar
-                    </button>
-                  </form>
-                </div>
-              </div>
+        <!-- INICIO CRUD usuario -->
+        <section class="container p-4">
+          <h2>Administrador - Sección Usuarios</h2>
+          <h2 class="text-center">Registrate</h2>
+          <form id="usuarioFormulario" class="row g-3">
+            <div class="form-group col-md-6">
+              <label for="usuarioNombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                id="usuarioNombre"
+                class="form-control"
+                placeholder="Nombre del usuario"
+                autofocus
+              />
             </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioApellido" class="form-label">Apellidos</label>
+              <input
+                type="text"
+                id="usuarioApellido"
+                class="form-control"
+                placeholder="Apellido"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioRut" class="form-label">Rut</label>
+              <input
+                type="text"
+                id="usuarioRut"
+                class="form-control"
+                placeholder="Rut"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioPassword" class="form-label">Contraseña</label>
+              <input
+                type="password"
+                id="usuarioPassword"
+                class="form-control"
+                placeholder="Password"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioDireccion" class="form-label">Dirección</label>
+              <input
+                type="text"
+                id="usuarioDireccion"
+                class="form-control"
+                placeholder="Dirección"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioEmail" class="form-label">Email</label>
+              <input
+                type="email"
+                id="usuarioEmail"
+                class="form-control"
+                placeholder="Email"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioTelefono" class="form-label">Teléfono</label>
+              <input
+                type="text"
+                id="usuarioTelefono"
+                class="form-control"
+                placeholder="Teléfono"
+              />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="usuarioBarrio" class="form-label"
+                >Barrio o territorio</label
+              >
+              <input
+                type="text"
+                id="usuarioBarrio"
+                class="form-control"
+                placeholder="Barrio"
+              />
+            </div>
+            <div class="col-12 text-center">
+              <button class="btn btn-primary" id="btnUsuarioFormulario">
+                Registrate
+              </button>
+            </div>
+          </form>
 
-            <!-- Usuario List -->
-            <div class="col-md-6" id="usuariosContainer"></div>
+          <!-- listado de solicitud de Usuarios intento tabla-->
+          <div class="row">
+            <div id="usuarioContenedor" class="col-md-12">
+              <table id="usuarioTablas" class="table table-striped bg-light">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre usuario</th>
+                    <th scope="col">Apellidos Usuarios</th>
+                    <th scope="col">RUT</th>
+                    <th scope="col">Contraseña</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Barrio o Territorio</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody id="usuarioFilas"></tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        </section>
+        <!-- FIN CRUD usuario -->
       </section>
       <section id="commentsSection">
-        <h1>Ingreso comentario</h1>
-        <div class="container p-2">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="h4">Ingreso de Comentarios</h1>
-
-                  <form id="comentarioFormulario">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        id="comentarioNombre"
-                        class="form-control"
-                        placeholder="Nombre Usuario"
-                        autofocus
-                      />
-                    </div>
-                    <!--  //(nombre, fecha, detalle, barrio) -->
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        id="comentarioFecha"
-                        class="form-control"
-                        placeholder="Fecha"
-                      />
-                      <input
-                        type="text"
-                        id="comentarioDetalle"
-                        class="form-control"
-                        placeholder="Detalle , comentario"
-                      />
-                      <input
-                        type="text"
-                        id="comentarioBarrio"
-                        class="form-control"
-                        placeholder="Barrio"
-                      />
-                    </div>
-
-                    <button
-                      class="btn btn-primary"
-                      id="btnComentarioFormulario"
-                    >
-                      Guardar
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            <!-- Listado de comentarios -->
-            <div class="col-md-6" id="comentariosContainer"></div>
-          </div>
-        </div>
-      </section>
-      <section id="projectsSection">Soy Proyectos</section>
-      <section id="neighborhoodSection">
-        <h1>Ingreso barrio test</h1>
-        <div class="container p-2">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h1 class="h4">Ingresa tu Barrio</h1>
-
-                  <form id="barrioFormulario">
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        id="barrioNombre"
-                        class="form-control"
-                        placeholder="Nombre del Barrio"
-                        autofocus
-                      />
-                    </div>
-
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        id="barrioUbicacion"
-                        class="form-control"
-                        placeholder="Ubicación"
-                      />
-                      <input
-                        type="text"
-                        id="barrioRegion"
-                        class="form-control"
-                        placeholder="Region"
-                      />
-                      <input
-                        type="text"
-                        id="barrioComuna"
-                        class="form-control"
-                        placeholder="Comuna"
-                      />
-                      <input
-                        type="text"
-                        id="barrioHistorial"
-                        class="form-control"
-                        placeholder="Historial"
-                      />
-                    </div>
-
-                    <button class="btn btn-primary" id="btnBarrioFormulario">
-                      Guardar
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            <!-- barrios List -->
-            <div class="col-md-6" id="barriosContainer"></div>
-          </div>
-        </div>
-      </section>
-      <section id="contactsSection">
-        <!-- INICIO CRUD contacto -->
+        <!-- INICIO CRUD comentario -->
         <section class="p-5">
-          <h2>Administrador - Sección Contactos</h2>
+          <h2>Administrador - Sección Comentarios</h2>
 
           <div class="row p-5">
-            <h2 class="h4">Administrador - Solicitud de Contacto</h2>
+            <h2 class="h4">Administrador - Solicitud de comentario</h2>
             <div class="col-md-12">
-              <form id="contactoFormulario" class="row g-3">
+              <form id="comentarioFormulario" class="row g-3">
                 <div class="form-group col-md-6">
-                  <label for="contactoNombre" class="form-label"
-                    >Nombre Contacto</label
+                  <label for="comentarioNombre" class="form-label"
+                    >Nombre usuario</label
                   >
                   <input
                     type="text"
-                    id="contactoNombre"
+                    id="comentarioNombre"
                     class="form-control"
-                    placeholder="Nombre del contacto"
+                    placeholder="Nombre Usuario"
                     autofocus
                   />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="contactoFecha" class="form-label"
+                  <label for="comentarioFecha" class="form-label"
                     >Fecha de Ingreso</label
                   >
                   <input
                     type="text"
-                    id="contactoFecha"
+                    id="comentarioFecha"
                     class="form-control"
                     placeholder="Fecha"
                   />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="contactoEmail" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    id="contactoEmail"
-                    class="form-control"
-                    placeholder="Email"
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="contactoEstado" class="form-label">Estado</label>
+                  <label for="comentarioBarrio" class="form-label"
+                    >Nombre Barrio</label
+                  >
                   <input
                     type="text"
-                    id="contactoEstado"
+                    id="comentarioBarrio"
                     class="form-control"
-                    placeholder="Estado"
+                    placeholder="Barrio"
                   />
                 </div>
-                <div class="form-group col-md-12">
-                  <label for="contactoDetalle" class="form-label"
+
+                <div class="form-group col-md-6">
+                  <label for="comentarioDetalle" class="form-label"
                     >Detalle</label
                   >
                   <textarea
-                    input
                     type="text"
-                    id="contactoDetalle"
+                    id="comentarioDetalle"
                     class="form-control"
-                    placeholder="Detalle"
+                    placeholder="Detalle , comentario"
                   ></textarea>
                 </div>
+
                 <div class="form-group col-md-12">
-                  <button class="btn btn-primary" id="btnContactoFormulario">
+                  <button class="btn btn-primary" id="btnComentarioFormulario">
                     Guardar
                   </button>
                 </div>
               </form>
             </div>
           </div>
-          <!-- listado de solicitud de contactos  intento tabla-->
+          <!-- listado de solicitud de Comentarios intento tabla-->
           <div class="row">
-            <div id="contactoContenedor" class="col-md-12">
-              <table id="contactoTablas" class="table table-striped bg-light">
+            <div id="comentarioContenedor" class="col-md-12">
+              <table id="comentarioTablas" class="table table-striped bg-light">
                 <thead>
                   <tr>
-                    <th scope="col">Nombre Contacto</th>
+                    <th scope="col">Nombre usuario</th>
                     <th scope="col">Fecha de Ingreso</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Estado</th>
+                    <th scope="col">Barrio</th>
                     <th scope="col">Detalle</th>
                     <th scope="col">Opciones</th>
                   </tr>
                 </thead>
-                <tbody id="contactoFilas"></tbody>
+                <tbody id="comentarioFilas"></tbody>
               </table>
             </div>
           </div>
         </section>
-        <!-- FIN CRUD contacto -->
+        <!-- FIN CRUD comentario -->
+      </section>
+      <section id="projectsSection">
+        <!-- INICIO CRUD proyectos -->
+        <section class="p-5">
+          <h2>Administrador - Sección Proyectos</h2>
+
+          <div class="row p-5">
+            <h2 class="h4">Administrador - Solicitud de Proyectos</h2>
+            <div class="col-md-12">
+              <form id="proyectoFormulario" class="row g-3">
+                <div class="form-group col-md-6">
+                  <label for="proyectoNombre" class="form-label"
+                    >Nombre Proyecto</label
+                  >
+                  <input
+                    type="text"
+                    id="proyectoNombre"
+                    class="form-control"
+                    placeholder="Nombre del proyecto"
+                    autofocus
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="proyectoBarrio" class="form-label"
+                    >Nombre Barrio</label
+                  >
+                  <input
+                    type="text"
+                    id="proyectoBarrio"
+                    class="form-control"
+                    placeholder="Barrio"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="proyectoDescripcion" class="form-label"
+                    >Descripcion</label
+                  >
+                  <textarea
+                    type="text"
+                    id="proyectoDescripcion"
+                    class="form-control"
+                    placeholder="descripcion"
+                  >
+                  </textarea>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="proyectoLikes" class="form-label">Likes</label>
+                  <input
+                    type="text"
+                    id="proyectoLikes"
+                    class="form-control"
+                    placeholder="likes"
+                  />
+                </div>
+
+                <div class="form-group col-md-12">
+                  <button class="btn btn-primary" id="btnProyectoFormulario">
+                    Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Proyecto listado -->
+          <div class="col-md-12 bg-info m-3 p-3" id="proyectosContainer">
+            <form id="proyectoFormularioBusqueda">
+              <div class="form-group">
+                <label for="proyectoBusqueda" class="form-label"
+                  >Burcar por nombre de Barrio</label
+                >
+                <input
+                  type="text"
+                  id="proyectoBusqueda"
+                  class="form-control"
+                  placeholder="Nombre del Barrio"
+                  autofocus
+                />
+              </div>
+              <button class="btn btn-primary" id="btnProyectoFiltro">
+                Buscar
+              </button>
+            </form>
+            <div class="row">
+              <div id="proyectoContenedorFiltrado" class="col-md-12">
+                <table
+                  id="proyectoTablasFiltrado"
+                  class="table table-striped bg-light"
+                >
+                  <thead>
+                    <tr>
+                      <th scope="col">Nombre proyecto</th>
+                      <th scope="col">Nombre Barrio</th>
+                      <th scope="col">Descripcion</th>
+                      <th scope="col">Likes</th>
+                    </tr>
+                  </thead>
+                  <tbody id="proyectoFilasFiltrado"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-md-6" id="proyectosContainerFiltrados"></div>
+          </div>
+
+          <!-- listado de solicitud de Proyectos  intento tabla-->
+          <div class="row">
+            <div id="proyectoContenedor" class="col-md-12">
+              <h3 class="p-5 text-center">Todos los Proyectos</h3>
+              <table id="proyectoTablas" class="table table-striped bg-light">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre proyecto</th>
+                    <th scope="col">Nombre Barrio</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody id="proyectoFilas"></tbody>
+              </table>
+            </div>
+          </div>
+        </section> comentario
+        <!-- FIN CRUD proyecto -->
+      </section>
+      <section id="neighborhoodSection">
+        <!-- INICIO CRUD barrio -->
+        <section class="p-5">
+          <h2>Administrador - Sección Barrios</h2>
+
+          <div class="row p-5">
+            <h2 class="h4">Administrador - Solicitud de Barrios</h2>
+            <div class="col-md-12">
+              <form id="barrioFormulario" class="row g-3">
+                <div class="form-group col-md-6">
+                  <label for="barrioNombre" class="form-label"
+                    >Nombre barrio</label
+                  >
+                  <input
+                    type="text"
+                    id="barrioNombre"
+                    class="form-control"
+                    placeholder="Nombre del Barrio"
+                    autofocus
+                  />
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="barrioUbicacion" class="form-label"
+                    >Ubicación</label
+                  >
+                  <input
+                    type="text"
+                    id="barrioUbicacion"
+                    class="form-control"
+                    placeholder="Ubicación"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="barrioRegion" class="form-label">Región</label>
+                  <input
+                    type="text"
+                    id="barrioRegion"
+                    class="form-control"
+                    placeholder="Region"
+                  />
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="barrioComuna" class="form-label">Comuna</label>
+                  <input
+                    type="text"
+                    id="barrioComuna"
+                    class="form-control"
+                    placeholder="Comuna"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="barrioHistorial" class="form-label"
+                    >Historial</label
+                  >
+                  <input
+                    type="text"
+                    id="barrioHistorial"
+                    class="form-control"
+                    placeholder="Historial"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <label for="barrioImagen" class="form-label">Imagen</label>
+                  <input
+                    type="file"
+                    name="imagen"
+                    id="barrioImagen"
+                    class="form-control"
+                    placeholder="Imagen"
+                  />
+                </div>
+                <div class="form-group col-md-12">
+                  <button class="btn btn-primary" id="btnBarrioFormulario">
+                    Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- listado de solicitud de Barrios  intento tabla-->
+          <div class="row">
+            <div id="barrioContenedor" class="col-md-12">
+              <table id="barrioTablas" class="table table-striped bg-light">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre barrio</th>
+                    <th scope="col">Ubicacion</th>
+                    <th scope="col">Region</th>
+                    <th scope="col">Comuna</th>
+                    <th scope="col">Historial</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Opciones</th>
+                  </tr>
+                </thead>
+                <tbody id="barrioFilas"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <!-- FIN CRUD barrio -->
+      </section>
+      <section id="contactsSection">
+        <!-- INICIO CRUD contacto -->
+        <section class="p-5">
+          <!-- INICIO CRUD contacto -->
+    <section class="p-5">
+      <h2>Administrador - Sección Contactos</h2>
+
+      <div class="row p-5">
+          <h2 class="h4">Administrador - Solicitud de Contacto</h2>
+          <div class="col-md-12">
+              <form id="contactoFormulario" class="row g-3">
+                  <div class="form-group col-md-6">
+                      <label for="contactoNombre" class="form-label">Nombre Contacto</label>
+                      <input type="text" id="contactoNombre" class="form-control" placeholder="Nombre del contacto"
+                          autofocus />
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="contactoFecha" class="form-label">Fecha de Ingreso</label>
+                      <input type="text" id="contactoFecha" class="form-control" placeholder="Fecha">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="contactoEmail" class="form-label">Email</label>
+                      <input type="email" id="contactoEmail" class="form-control" placeholder="Email">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="contactoEstado" class="form-label">Estado</label>
+                      <input type="text" id="contactoEstado" class="form-control" placeholder="Estado">
+                  </div>
+                  <div class="form-group col-md-12">
+                      <label for="contactoDetalle" class="form-label">Detalle</label>
+                      <textarea input type="text" id="contactoDetalle" class="form-control"
+                          placeholder="Detalle"></textarea>
+                  </div>
+                  <div class="form-group col-md-12">
+                      <button class="btn btn-primary" id="btnContactoFormulario">
+                          Guardar
+                      </button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <!-- listado de solicitud de contactos  intento tabla-->
+      <div class="row">
+          <div id="contactoContenedor" class="col-md-12 ">
+              <table id="contactoTablas" class="table table-striped bg-light">
+                  <thead>
+                      <tr>
+                          <th scope="col">Nombre Contacto</th>
+                          <th scope="col">Fecha de Ingreso</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Estado</th>
+                          <th scope="col">Detalle</th>
+                          <th scope="col">Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody id="contactoFilas">
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </section>
+  <!-- FIN CRUD contacto -->
       </section>
     </div>
 

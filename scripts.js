@@ -6,80 +6,72 @@ $("#users, #comments, #projects, #neighborhood, #contacts").click((event) => {
   $(id).show();
 });
 
-//////////////////Scripts BarrioCRUD////////////////////////
+// Scripts para CRUDS
 const db = firebase.firestore();
-////////////////////////////////////////
-////////////  Para barrios  ////////////
-// nombre formulario : barrioFormulario
-
-const barrioFormulario = document.getElementById("barrioFormulario");
-const barriosContainer = document.getElementById("barriosContainer");
-const usuarioFormulario = document.getElementById("usuarioFormulario");
-const usuariosContainer = document.getElementById("usuariosContainer");
-const contactoFormulario = document.getElementById("contactoFormulario");
-//const contactosContainer = document.getElementById("contactosContainer");
-const contactosFilas = document.getElementById("contactoFilas");
-
 let editStatus = false;
 let id = "";
+////////////// Scripts Proyectos CRUD //////////////
+const proyectoFormulario = document.getElementById("proyectoFormulario");
+// const proyectosContainer = document.getElementById("proyectosContainer");
+const proyectoFilas = document.getElementById("proyectoFilas");
+const proyectoFilasFiltrado = document.getElementById("proyectoFilasFiltrado");
+
+proyectoFilasFiltrado;
 
 /// crear
-const guardarBarrio = (nombre, ubicacion, region, comuna, historial) =>
-  db.collection("barrios").doc().set({
+const guardarProyecto = (nombre, barrio, descripcion, likes) =>
+  db.collection("proyectos").doc().set({
     nombre,
-    ubicacion,
-    region,
-    comuna,
-    historial,
+    barrio,
+    descripcion,
+    likes,
   });
 
 // leer
-const getBarrios = () => db.collection("barrios").get();
-const onGetBarrios = (callback) =>
-  db.collection("barrios").onSnapshot(callback);
+const getProyectos = () => db.collection("proyectos").get();
+const onGetProyectos = (callback) =>
+  db.collection("proyectos").onSnapshot(callback);
 
 // delete
-const deleteBarrio = (id) => db.collection("barrios").doc(id).delete();
+const deleteProyecto = (id) => db.collection("proyectos").doc(id).delete();
 
 // editar
-const getBarrio = (id) => db.collection("barrios").doc(id).get();
-const updateBarrio = (id, updatedBarrio) =>
-  db.collection("barrios").doc(id).update(updatedBarrio);
+const getProyecto = (id) => db.collection("proyectos").doc(id).get();
+const updateProyecto = (id, updatedProyecto) =>
+  db.collection("proyectos").doc(id).update(updatedProyecto);
 
 // para mostrar en pantalla
 window.addEventListener("DOMContentLoaded", async (e) => {
-  onGetBarrios((querySnapshot) => {
-    barriosContainer.innerHTML = "";
+  onGetProyectos((querySnapshot) => {
+    proyectoFilas.innerHTML = "";
 
     querySnapshot.forEach((doc) => {
-      const barrio = doc.data();
+      const proyecto = doc.data();
 
-      barriosContainer.innerHTML += `
+      proyectoFilas.innerHTML += `
         
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${barrio.nombre}</h3>
-        <p>${barrio.ubicacion}</p>
-        <p>${barrio.region}</p>
-        <p>${barrio.comuna}</p>
-        <p>${barrio.historial}</p>
-        <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
+      <tr>
+      <td>${proyecto.nombre}</td>
+      <td>${proyecto.barrio}</td>
+      <td>${proyecto.descripcion}</td>
+      <td>${proyecto.likes}</td>
+    
+      <td> <button class="btn btn-danger btn-delete" data-id="${doc.id}">
+      🗑 Delete
+    </button>
+    <button class="btn btn-warning btn-edit" data-id="${doc.id}">
+      🖉 Edit
+    </button></td>
+      </tr>
       
       `;
       // para borrar
-      const btnsDelete = barriosContainer.querySelectorAll(".btn-delete");
+      const btnsDelete = proyectoFilas.querySelectorAll(".btn-delete");
       btnsDelete.forEach((btn) =>
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
           try {
-            await deleteBarrio(e.target.dataset.id);
+            await deleteProyecto(e.target.dataset.id);
           } catch (error) {
             console.log(error);
           }
@@ -87,21 +79,21 @@ window.addEventListener("DOMContentLoaded", async (e) => {
       );
 
       // para editar
-      const btnsEdit = barriosContainer.querySelectorAll(".btn-edit");
+      const btnsEdit = proyectoFilas.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           try {
-            const doc = await getBarrio(e.target.dataset.id);
-            const barrio = doc.data();
-            barrioFormulario["barrioNombre"].value = barrio.nombre;
-            barrioFormulario["barrioUbicacion"].value = barrio.ubicacion;
-            barrioFormulario["barrioRegion"].value = barrio.region;
-            barrioFormulario["barrioComuna"].value = barrio.comuna;
-            barrioFormulario["barrioHistorial"].value = barrio.historial;
+            const doc = await getProyecto(e.target.dataset.id);
+            const proyecto = doc.data();
+            proyectoFormulario["proyectoNombre"].value = proyecto.nombre;
+            proyectoFormulario["proyectoBarrio"].value = proyecto.barrio;
+            proyectoFormulario["proyectoDescripcion"].value =
+              proyecto.descripcion;
+            proyectoFormulario["proyectoLikes"].value = proyecto.likes;
 
             editStatus = true;
             id = doc.id;
-            barrioFormulario["btnBarrioFormulario"].innerText = "Update";
+            proyectoFormulario["btnProyectoFormulario"].innerText = "Update";
           } catch (error) {
             console.log(error);
           }
@@ -113,45 +105,81 @@ window.addEventListener("DOMContentLoaded", async (e) => {
 });
 
 // para crear registros
-barrioFormulario.addEventListener("submit", async (e) => {
+proyectoFormulario.addEventListener("submit", async (e) => {
   e.preventDefault();
-  // nombre, ubicacion, region, comuna, historial
-  const barrioNombre = barrioFormulario["barrioNombre"];
-  const barrioUbicacion = barrioFormulario["barrioUbicacion"];
-  const barrioRegion = barrioFormulario["barrioRegion"];
-  const barrioComuna = barrioFormulario["barrioComuna"];
-  const barrioHistorial = barrioFormulario["barrioHistorial"];
+
+  const proyectoNombre = proyectoFormulario["proyectoNombre"];
+  const proyectoBarrio = proyectoFormulario["proyectoBarrio"];
+  const proyectoDescripcion = proyectoFormulario["proyectoDescripcion"];
+  const proyectoLikes = proyectoFormulario["proyectoLikes"];
+
   try {
     if (!editStatus) {
-      await guardarBarrio(
-        barrioNombre.value,
-        barrioUbicacion.value,
-        barrioRegion.value,
-        barrioComuna.value,
-        barrioHistorial.value
+      await guardarProyecto(
+        proyectoNombre.value,
+        proyectoBarrio.value,
+        proyectoDescripcion.value,
+        proyectoLikes.value
       );
     } else {
-      await updateBarrio(id, {
-        nombre: barrioNombre.value,
-        ubicacion: barrioUbicacion.value,
-        region: barrioRegion.value,
-        comuna: barrioComuna.value,
-        historial: barrioHistorial.value,
+      await updateProyecto(id, {
+        nombre: proyectoNombre.value,
+        barrio: proyectoBarrio.value,
+        descripcion: proyectoDescripcion.value,
+        likes: proyectoLikes.value,
       });
 
       editStatus = false;
       id = "";
-      barrioFormulario["btnBarrioFormulario"].innerText = "Guardar";
+      proyectoFormulario["btnProyectoFormulario"].innerText = "Guardar";
     }
 
-    barrioFormulario.reset();
-    barrioNombre.focus();
+    proyectoFormulario.reset();
+    proyectoNombre.focus();
   } catch (error) {
     console.log(error);
   }
 });
 
-//////////////////Scripts BarrioCRUD////////////////////////
+// muestra listado filtrados
+
+// para crear registros
+proyectoFormularioBusqueda.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const proyectoBusqueda = proyectoFormularioBusqueda["proyectoBusqueda"];
+  try {
+    await db
+      .collection("proyectos")
+      .where("barrio", "==", proyectoBusqueda.value)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          const proyecto = doc.data();
+          proyectoFilasFiltrado.innerHTML += `
+          <tr>
+      <td>${proyecto.nombre}</td>
+      <td>${proyecto.barrio}</td>
+      <td>${proyecto.descripcion}</td>
+      <td>${proyecto.likes}</td>
+      </tr>
+        
+
+  
+  `;
+        });
+      });
+
+    proyectoFormularioBusqueda.reset();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+////////////// Scripts Usuarios CRUD //////////////
+const usuarioFormulario = document.getElementById("usuarioFormulario");
+//const usuariosContainer = document.getElementById("usuariosContainer");
+const usuariosFilas = document.getElementById("usuarioFilas");
+
 /// crear
 const guardarUsuario = (
   nombre,
@@ -190,35 +218,34 @@ const updateUsuario = (id, updatedUsuario) =>
 // para mostrar en pantalla
 window.addEventListener("DOMContentLoaded", async (e) => {
   onGetUsuarios((querySnapshot) => {
-    usuariosContainer.innerHTML = "";
+    usuariosFilas.innerHTML = "";
 
     querySnapshot.forEach((doc) => {
       const usuario = doc.data();
 
-      usuariosContainer.innerHTML += `
-        
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${usuario.nombre}</h3>
-        <p>${usuario.apellido}</p>
-        <p>${usuario.rut}</p>
-        <p>${usuario.password}</p>
-        <p>${usuario.direccion}</p>
-        <p>${usuario.email}</p>
-        <p>${usuario.telefono}</p>
-        <p>${usuario.barrio}</p>
-        <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
+      usuariosFilas.innerHTML += `
+      <tr>
+      <td>${usuario.nombre}</td>
+      <td>${usuario.apellido}</td>
+      <td>${usuario.rut}</td>
+      <td>${usuario.password}</td>
+      <td>${usuario.direccion}</td>
+      <td>${usuario.email}</td>
+      <td>${usuario.telefono}</td>
+      <td>${usuario.barrio}</td>       
+
+
+        <td> <button class="btn btn-danger btn-delete" data-id="${doc.id}">
+        🗑 Delete
+      </button>
+      <button class="btn btn-warning btn-edit" data-id="${doc.id}">
+        🖉 Edit
+      </button></td>
+        </tr>  
       
       `;
       // para borrar
-      const btnsDelete = usuariosContainer.querySelectorAll(".btn-delete");
+      const btnsDelete = usuariosFilas.querySelectorAll(".btn-delete");
       btnsDelete.forEach((btn) =>
         btn.addEventListener("click", async (e) => {
           console.log(e.target.dataset.id);
@@ -231,7 +258,7 @@ window.addEventListener("DOMContentLoaded", async (e) => {
       );
 
       // para editar
-      const btnsEdit = usuariosContainer.querySelectorAll(".btn-edit");
+      const btnsEdit = usuariosFilas.querySelectorAll(".btn-edit");
       btnsEdit.forEach((btn) => {
         btn.addEventListener("click", async (e) => {
           try {
@@ -307,7 +334,271 @@ usuarioFormulario.addEventListener("submit", async (e) => {
   }
 });
 
-//////////////////Scripts BarrioCRUD////////////////////////
+////////////// Scripts Comentarios CRUD //////////////
+
+const comentarioFormulario = document.getElementById("comentarioFormulario");
+// const comentariosContainer = document.getElementById("comentariosContainer");
+const comentarioFilas = document.getElementById("comentarioFilas");
+
+/// crear
+const guardarComentario = (nombre, fecha, detalle, barrio) =>
+  db.collection("comentarios").doc().set({
+    nombre,
+    fecha,
+    detalle,
+    barrio,
+  });
+
+// leer
+const getComentarios = () => db.collection("comentarios").get();
+const onGetComentarios = (callback) =>
+  db.collection("comentarios").onSnapshot(callback);
+
+// delete
+const deleteComentario = (id) => db.collection("comentarios").doc(id).delete();
+
+// editar
+const getComentario = (id) => db.collection("comentarios").doc(id).get();
+const updateComentario = (id, updatedComentario) =>
+  db.collection("comentarios").doc(id).update(updatedComentario);
+
+// para mostrar en pantalla
+window.addEventListener("DOMContentLoaded", async (e) => {
+  onGetComentarios((querySnapshot) => {
+    comentarioFilas.innerHTML = "";
+
+    querySnapshot.forEach((doc) => {
+      const comentario = doc.data();
+      // (usuario, fecha, comentarioUsuario, barrio)
+      comentarioFilas.innerHTML += `
+        <tr>
+        <td> ${comentario.nombre}</td>
+        <td> ${comentario.fecha}</td>
+        <td> ${comentario.detalle}</td>
+        <td> ${comentario.barrio}</td>
+        <td>  <button class="btn btn-primary btn-delete" data-id="${doc.id}"> 🗑 Delete </button>
+      <button class="btn btn-secondary btn-edit" data-id="${doc.id}"> 🖉 Edit </button> </td>        
+        </tr>
+      
+      `;
+      // para borrar
+      const btnsDelete = comentarioFilas.querySelectorAll(".btn-delete");
+      btnsDelete.forEach((btn) =>
+        btn.addEventListener("click", async (e) => {
+          console.log(e.target.dataset.id);
+          try {
+            await deleteComentario(e.target.dataset.id);
+          } catch (error) {
+            console.log(error);
+          }
+        })
+      );
+
+      // para editar
+      const btnsEdit = comentarioFilas.querySelectorAll(".btn-edit");
+      btnsEdit.forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          try {
+            const doc = await getComentario(e.target.dataset.id);
+            const comentario = doc.data();
+            comentarioFormulario["comentarioNombre"].value = comentario.nombre;
+            comentarioFormulario["comentarioFecha"].value = comentario.fecha;
+            comentarioFormulario["comentarioDetalle"].value =
+              comentario.detalle;
+            comentarioFormulario["comentarioBarrio"].value = comentario.barrio;
+            editStatus = true;
+            id = doc.id;
+            comentarioFormulario["btnComentarioFormulario"].innerText =
+              "Update";
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      });
+      // fin editar
+    });
+  });
+});
+
+// para crear registros
+comentarioFormulario.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const comentarioNombre = comentarioFormulario["comentarioNombre"];
+  const comentarioFecha = comentarioFormulario["comentarioFecha"];
+  const comentarioDetalle = comentarioFormulario["comentarioDetalle"];
+  const comentarioBarrio = comentarioFormulario["comentarioBarrio"];
+  try {
+    if (!editStatus) {
+      await guardarComentario(
+        comentarioNombre.value,
+        comentarioFecha.value,
+        comentarioDetalle.value,
+        comentarioBarrio.value
+      );
+    } else {
+      await updateComentario(id, {
+        nombre: comentarioNombre.value,
+        fecha: comentarioFecha.value,
+        detalle: comentarioDetalle.value,
+        barrio: comentarioBarrio.value,
+      });
+
+      editStatus = false;
+      id = "";
+      comentarioFormulario["btnComentarioFormulario"].innerText = "Guardar";
+    }
+
+    comentarioFormulario.reset();
+    comentarioNombre.focus();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+////////////// Scripts Barrios CRUD //////////////
+const barrioFormulario = document.getElementById("barrioFormulario");
+// const barriosContainer = document.getElementById("barriosContainer");
+const barrioFilas = document.getElementById("barrioFilas");
+
+/// crear
+const guardarBarrio = (nombre, ubicacion, region, comuna, historial, imagen) =>
+  db.collection("barrios").doc().set({
+    nombre,
+    ubicacion,
+    region,
+    comuna,
+    historial,
+    imagen,
+  });
+
+// leer
+const getBarrios = () => db.collection("barrios").get();
+const onGetBarrios = (callback) =>
+  db.collection("barrios").onSnapshot(callback);
+
+// delete
+const deleteBarrio = (id) => db.collection("barrios").doc(id).delete();
+
+// editar
+const getBarrio = (id) => db.collection("barrios").doc(id).get();
+const updateBarrio = (id, updatedBarrio) =>
+  db.collection("barrios").doc(id).update(updatedBarrio);
+
+// para mostrar en pantalla
+window.addEventListener("DOMContentLoaded", async (e) => {
+  onGetBarrios((querySnapshot) => {
+    barrioFilas.innerHTML = "";
+
+    querySnapshot.forEach((doc) => {
+      const barrio = doc.data();
+
+      barrioFilas.innerHTML += `
+        <tr>
+        <td> ${barrio.nombre}</td>
+        <td> ${barrio.ubicacion}</td>
+        <td> ${barrio.region}</td>
+        <td> ${barrio.comuna}</td>
+        <td> ${barrio.historial}</td>
+        <td> <img src="${barrio.imagen}" alt="barrop" width="300" height="300"></td>
+        <td> <button class="btn btn-primary btn-delete" data-id="${doc.id}">
+        🗑 Delete
+      </button>
+      <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
+        🖉 Edit
+      </button></td>      
+        
+        </tr>  
+      
+      `;
+      // para borrar
+      const btnsDelete = barrioFilas.querySelectorAll(".btn-delete");
+      btnsDelete.forEach((btn) =>
+        btn.addEventListener("click", async (e) => {
+          console.log(e.target.dataset.id);
+          try {
+            await deleteBarrio(e.target.dataset.id);
+          } catch (error) {
+            console.log(error);
+          }
+        })
+      );
+
+      // para editar
+      const btnsEdit = barrioFilas.querySelectorAll(".btn-edit");
+      btnsEdit.forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+          try {
+            const doc = await getBarrio(e.target.dataset.id);
+            const barrio = doc.data();
+            barrioFormulario["barrioNombre"].value = barrio.nombre;
+            barrioFormulario["barrioUbicacion"].value = barrio.ubicacion;
+            barrioFormulario["barrioRegion"].value = barrio.region;
+            barrioFormulario["barrioComuna"].value = barrio.comuna;
+            barrioFormulario["barrioHistorial"].value = barrio.historial;
+            barrioFormulario["barrioImagen"].value = barrio.imagen;
+
+            editStatus = true;
+            id = doc.id;
+            barrioFormulario["btnBarrioFormulario"].innerText = "Update";
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      });
+      // fin editar
+    });
+  });
+});
+
+// para crear registros
+barrioFormulario.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  // nombre, ubicacion, region, comuna, historial
+  const barrioNombre = barrioFormulario["barrioNombre"];
+  const barrioUbicacion = barrioFormulario["barrioUbicacion"];
+  const barrioRegion = barrioFormulario["barrioRegion"];
+  const barrioComuna = barrioFormulario["barrioComuna"];
+  const barrioHistorial = barrioFormulario["barrioHistorial"];
+  const barrioImagen = barrioFormulario["barrioImagen"];
+
+  try {
+    if (!editStatus) {
+      await guardarBarrio(
+        barrioNombre.value,
+        barrioUbicacion.value,
+        barrioRegion.value,
+        barrioComuna.value,
+        barrioHistorial.value,
+        barrioImagen.value
+      );
+    } else {
+      await updateBarrio(id, {
+        nombre: barrioNombre.value,
+        ubicacion: barrioUbicacion.value,
+        region: barrioRegion.value,
+        comuna: barrioComuna.value,
+        historial: barrioHistorial.value,
+        imagen: barrioImagen.value,
+      });
+
+      editStatus = false;
+      id = "";
+      barrioFormulario["btnBarrioFormulario"].innerText = "Guardar";
+    }
+
+    barrioFormulario.reset();
+    barrioNombre.focus();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+////////////// Scripts Contactos CRUD //////////////
+const contactoFormulario = document.getElementById("contactoFormulario");
+//const contactosContainer = document.getElementById("contactosContainer");
+const contactosFilas = document.getElementById("contactoFilas");
+
 /// crear
 const guardarContacto = (nombre, fecha, detalle, email, estado) =>
   db.collection("contactos").doc().set({
@@ -424,133 +715,6 @@ contactoFormulario.addEventListener("submit", async (e) => {
 
     contactoFormulario.reset();
     contactoNombre.focus();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-//////////////////Scripts ComentariosCRUD////////////////////////
-const comentarioFormulario = document.getElementById("comentarioFormulario");
-const comentariosContainer = document.getElementById("comentariosContainer");
-
-/// crear
-const guardarComentario = (nombre, fecha, detalle, barrio) =>
-  db.collection("comentarios").doc().set({
-    nombre,
-    fecha,
-    detalle,
-    barrio,
-  });
-
-// leer
-const getComentarios = () => db.collection("comentarios").get();
-const onGetComentarios = (callback) =>
-  db.collection("comentarios").onSnapshot(callback);
-
-// delete
-const deleteComentario = (id) => db.collection("comentarios").doc(id).delete();
-
-// editar
-const getComentario = (id) => db.collection("comentarios").doc(id).get();
-const updateComentario = (id, updatedComentario) =>
-  db.collection("comentarios").doc(id).update(updatedComentario);
-
-// para mostrar en pantalla
-window.addEventListener("DOMContentLoaded", async (e) => {
-  onGetComentarios((querySnapshot) => {
-    comentariosContainer.innerHTML = "";
-
-    querySnapshot.forEach((doc) => {
-      const comentario = doc.data();
-      // (usuario, fecha, comentarioUsuario, barrio)
-      comentariosContainer.innerHTML += `
-        
-        <div class="card card-body mt-2 border-primary">
-        <h3 class="h5">${comentario.nombre}</h3>
-        <p>${comentario.fecha}</p>
-        <p>${comentario.detalle}</p>
-        <p>${comentario.barrio}</p>
-         <div>
-          <button class="btn btn-primary btn-delete" data-id="${doc.id}">
-            🗑 Delete
-          </button>
-          <button class="btn btn-secondary btn-edit" data-id="${doc.id}">
-            🖉 Edit
-          </button>
-        </div>
-      </div>
-      
-      `;
-      // para borrar
-      const btnsDelete = comentariosContainer.querySelectorAll(".btn-delete");
-      btnsDelete.forEach((btn) =>
-        btn.addEventListener("click", async (e) => {
-          console.log(e.target.dataset.id);
-          try {
-            await deleteComentario(e.target.dataset.id);
-          } catch (error) {
-            console.log(error);
-          }
-        })
-      );
-
-      // para editar
-      const btnsEdit = comentariosContainer.querySelectorAll(".btn-edit");
-      btnsEdit.forEach((btn) => {
-        btn.addEventListener("click", async (e) => {
-          try {
-            const doc = await getComentario(e.target.dataset.id);
-            const comentario = doc.data();
-            comentarioFormulario["comentarioNombre"].value = comentario.nombre;
-            comentarioFormulario["comentarioFecha"].value = comentario.fecha;
-            comentarioFormulario["comentarioDetalle"].value =
-              comentario.detalle;
-            comentarioFormulario["comentarioBarrio"].value = comentario.barrio;
-            editStatus = true;
-            id = doc.id;
-            comentarioFormulario["btnComentarioFormulario"].innerText =
-              "Update";
-          } catch (error) {
-            console.log(error);
-          }
-        });
-      });
-      // fin editar
-    });
-  });
-});
-
-// para crear registros
-comentarioFormulario.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const comentarioNombre = comentarioFormulario["comentarioNombre"];
-  const comentarioFecha = comentarioFormulario["comentarioFecha"];
-  const comentarioDetalle = comentarioFormulario["comentarioDetalle"];
-  const comentarioBarrio = comentarioFormulario["comentarioBarrio"];
-  try {
-    if (!editStatus) {
-      await guardarComentario(
-        comentarioNombre.value,
-        comentarioFecha.value,
-        comentarioDetalle.value,
-        comentarioBarrio.value
-      );
-    } else {
-      await updateComentario(id, {
-        nombre: comentarioNombre.value,
-        fecha: comentarioFecha.value,
-        detalle: comentarioDetalle.value,
-        barrio: comentarioBarrio.value,
-      });
-
-      editStatus = false;
-      id = "";
-      comentarioFormulario["btnComentarioFormulario"].innerText = "Guardar";
-    }
-
-    comentarioFormulario.reset();
-    comentarioNombre.focus();
   } catch (error) {
     console.log(error);
   }
