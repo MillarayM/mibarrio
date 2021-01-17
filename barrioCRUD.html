@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <!-- INICIO CRUD barrio -->
+    <section class="p-5">
+        <h2>Administrador - Sección Barrios</h2>
+
+        <div class="row p-5">
+            <h2 class="h4">Administrador - Solicitud de Barrios</h2>
+            <div class="col-md-12">
+                <form id="barrioFormulario" class="row g-3">
+
+                    <div class="form-group col-md-6">
+                        <label for="barrioNombre" class="form-label">Nombre barrio</label>
+                        <input type="text" id="barrioNombre" class="form-control" placeholder="Nombre del Barrio"
+                            autofocus />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="barrioUbicacion" class="form-label">Ubicación</label>
+                        <input type="text" id="barrioUbicacion" class="form-control" placeholder="Ubicación" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="barrioRegion" class="form-label">Región</label>
+                        <input type="text" id="barrioRegion" class="form-control" placeholder="Region" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="barrioComuna" class="form-label">Comuna</label>
+                        <input type="text" id="barrioComuna" class="form-control" placeholder="Comuna" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="barrioHistorial" class="form-label">Historial</label>
+                        <input type="text" id="barrioHistorial" class="form-control" placeholder="Historial" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="barrioImagen" class="form-label">Imagen</label>
+                        <input type="file" name="imagen" id="barrioImagen" class="form-control" placeholder="Imagen" />
+                    </div>
+                    <div class="form-group col-md-12">
+                        <button class="btn btn-primary" id="btnBarrioFormulario">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- listado de solicitud de Barrios  intento tabla-->
+        <div class="row">
+            <div id="barrioContenedor" class="col-md-12 ">
+                <table id="barrioTablas" class="table table-striped bg-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre barrio</th>
+                            <th scope="col">Ubicacion</th>
+                            <th scope="col">Region</th>
+                            <th scope="col">Comuna</th>
+                            <th scope="col">Historial</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="barrioFilas">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- FIN CRUD barrio -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBD9dBwvVCVL8-TbSBvXSJvj_8r3gX6kvE",
+            authDomain: "mibarrio-51942.firebaseapp.com",
+            projectId: "mibarrio-51942",
+            storageBucket: "mibarrio-51942.appspot.com",
+            messagingSenderId: "182863864432",
+            appId: "1:182863864432:web:c9afa25a99632538510ab5",
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="scriptsBarrioCrud.js"></script>
+
+
+</body>
+
+</html>
